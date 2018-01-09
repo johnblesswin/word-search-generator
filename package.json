@@ -4,13 +4,17 @@
   "private": true,
   "dependencies": {
     "babel-polyfill": "^6.26.0",
+    "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
     "react-router-redux": "^4.0.8",
     "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "semantic-ui-css": "^2.2.12",
+    "semantic-ui-react": "^0.77.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -24,8 +28,11 @@
     "babel-preset-react-hmre": "^1.1.1",
     "babel-preset-stage-2": "^6.24.1",
     "css-loader": "^0.28.8",
+    "file-loader": "^1.1.6",
+    "image-webpack-loader": "^3.4.2",
     "react-transform-hmr": "^1.0.4",
     "style-loader": "^0.19.1",
+    "url-loader": "^0.6.2",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.10.0"
   },
