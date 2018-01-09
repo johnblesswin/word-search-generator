@@ -1,6 +1,6 @@
 import React from 'react';
-import { Route, NavLink } from 'react-router-dom';
-import { Icon, Header, Grid, Menu } from 'semantic-ui-react';
+import { NavLink } from 'react-router-dom';
+import { Icon, Menu } from 'semantic-ui-react';
 
 class MainMenu extends React.Component {
 

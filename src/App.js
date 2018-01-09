@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './App.css';
-import { Icon, Header, Grid } from 'semantic-ui-react'
-import { Route } from 'react-router-dom';
+import { Icon, Header, Grid } from 'semantic-ui-react';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 import MainMenu from './modules/MainMenu';
 import StartPage from './modules/StartPage';
@@ -13,6 +13,7 @@ import Print from './modules/Print';
 import Download from './modules/Download';
 
 class App extends React.Component {
+
   render() {
     return (
       <React.Fragment>
@@ -29,13 +30,16 @@ class App extends React.Component {
           <Grid.Column width='4'>
             <MainMenu />
           </Grid.Column>
-          <Grid.Column width="12">
-            <Route exact path="/" component={StartPage} />
-            <Route path="/setup-grid" component={SetupGrid} />
-            <Route path="/add-words" component={AddWords} />
-            <Route path="/preview" component={Preview} />
-            <Route path="/print" component={Print} />
-            <Route path="/download" component={Download} />
+          <Grid.Column width='12'>
+            <Switch>
+              <Route exact path='/' component={StartPage} />
+              <Route path='/setup-grid' component={SetupGrid} />
+              <Route path='/add-words' component={AddWords} />
+              <Route path='/preview' component={Preview} />
+              <Route path='/print' component={Print} />
+              <Route path='/download' component={Download} />
+              <Route path="*" render={() => (<Redirect to="/" />)} />
+            </Switch>
           </Grid.Column>
         </Grid>
       </React.Fragment>
