@@ -1,4 +1,4 @@
-export default function addWordsReducer(state = {}, action) {
+export default function addWordsReducer(state = [], action) {
   switch (action.type) {
     default:
       return state;

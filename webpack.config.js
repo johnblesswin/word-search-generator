@@ -4,6 +4,7 @@ const webpack = require('webpack');
 module.exports = {
   devtool: 'inline-source-map',
   entry: [
+    'babel-polyfill',
     path.resolve(__dirname, 'src/index')
   ],
   target: 'web',
