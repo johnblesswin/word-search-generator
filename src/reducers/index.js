@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import words from './addWordsReducer';
+import words from './wordListReducer';
 
 const rootReducer = combineReducers({
   words

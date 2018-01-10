@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Input } from 'semantic-ui-react';
 
-class AddWords extends React.Component {
+class WordList extends React.Component {
 
   constructor(props) {
     super(props);
@@ -44,7 +45,7 @@ class AddWords extends React.Component {
 
 }
 
-AddWords.propTypes = {
+WordList.propTypes = {
   dispatch: PropTypes.func.isRequired,
   words: PropTypes.array.isRequred
 };
@@ -55,6 +56,8 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-//function mapDispatchToProps()
+function mapDispatchToProps(dispatch) {
 
-export default connect(mapStateToProps /*, mapDispatchToProps*/)(AddWords);
+}
+
+export default connect(mapStateToProps/*, mapDispatchToProps*/)(WordList);

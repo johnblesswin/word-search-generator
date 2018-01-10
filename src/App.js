@@ -7,7 +7,7 @@ import { Route, Switch, Redirect, NavLink } from 'react-router-dom';
 // app modules:
 import StartPage from './modules/StartPage';
 import SetupGrid from './modules/SetupGrid';
-import AddWords from './modules/AddWords';
+import WordList from './modules/WordList';
 import Preview from './modules/Preview';
 import Print from './modules/Print';
 import Download from './modules/Download';
@@ -41,7 +41,7 @@ class App extends React.Component {
       <Switch>
         <Route exact path='/' component={StartPage} />
         <Route path='/setup-grid' component={SetupGrid} />
-        <Route path='/add-words' component={AddWords} />
+        <Route path='/add-words' component={WordList} />
         <Route path='/preview' component={Preview} />
         <Route path='/print' component={Print} />
         <Route path='/download' component={Download} />
