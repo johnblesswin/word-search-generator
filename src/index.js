@@ -1,10 +1,19 @@
 import React from 'react';
 import { render } from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import configureStore from './store';
+import { Provider } from 'react-redux';
 import 'semantic-ui-css/semantic.min.css';
 import './index.css';
-import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
 
-render(<Router><App /></Router>,
+const store = configureStore();
+
+render(
+  <Provider store={store}>
+    <Router>
+      <App />
+    </Router>
+  </Provider>,
   document.getElementById('root')
 );
