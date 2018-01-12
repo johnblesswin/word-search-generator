@@ -1,10 +1,5 @@
 const initialState = {
-list: [{    word: 'real list',
-      isTooLong: false,
-      isTooShort: true,
-      hasInvalidChars: false,
-      isValid: true,
-      errors: []}],
+  list: [],
   currentlyTyped: {
     word: '',
     isTooLong: false,
@@ -16,9 +11,7 @@ list: [{    word: 'real list',
   letterCount: 0,
   touched: false,
   locked: false,
-  errors: [],
-  __count: 0,
-  __array: []
+  errors: []
 };
 
 export default function wordsReducer(state = initialState, action) {

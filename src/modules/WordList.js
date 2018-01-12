@@ -3,36 +3,25 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import * as wordListActions from '../actions/wordListActions';
 import { connect } from 'react-redux';
-import { Input } from 'semantic-ui-react';
+import { Input, List } from 'semantic-ui-react';
 import WordListItem from './WordListItem';
 
 class WordList extends React.Component {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {typedWord: ''};
-
-    this.submitWord = this.submitWord.bind(this);
-    this.typeWord = this.typeWord.bind(this);
-    this.keyDown = this.keyDown.bind(this);
-    this.removeWord = this.removeWord.bind(this);
-  }
-
-  submitWord() {
+  submitWord = () => {
     this.props.actions.submitWord();
   }
 
-  typeWord(event, {value}) {
+  typeWord = (event, {value}) => {
     this.props.actions.typeWord(value);
   }
 
-  keyDown({keyCode}) {
+  keyDown = ({keyCode}) => {
     // Trigger word adding on Enter:
     if (keyCode == 13) this.submitWord();
   }
 
-  removeWord(word) {
+  removeWord = (word) => {
     this.props.actions.removeWord(word);
   }
 
@@ -48,28 +37,27 @@ class WordList extends React.Component {
           onKeyDown={this.keyDown}
           value={this.props.currentlyTyped.word}
         />
-        <ul>
+        <List celled>
           {this.props.list.map(item =>
             <WordListItem key={item.word} word={item.word} remove={this.removeWord} />
           )}
-        </ul>
+        </List>
       </React.Fragment>
     );
   }
 
 }
 
-/*WordList.propTypes = {
+WordList.propTypes = {
   actions: PropTypes.object.isRequired,
-  words: PropTypes.array.isRequred
-};*/
+  currentlyTyped: PropTypes.object.isRequred,
+  list: PropTypes.array.isRequred
+};
 
 function mapStateToProps(state, ownProps) {
   return {
-  //  state: state.words,
     currentlyTyped: state.words.currentlyTyped,
-    list: state.words.list,
-    count: state.words.__count
+    list: state.words.list
   };
 }
 
