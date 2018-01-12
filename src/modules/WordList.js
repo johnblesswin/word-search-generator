@@ -50,8 +50,8 @@ class WordList extends React.Component {
 
 WordList.propTypes = {
   actions: PropTypes.object.isRequired,
-  currentlyTyped: PropTypes.object.isRequred,
-  list: PropTypes.array.isRequred
+  currentlyTyped: PropTypes.object.isRequired,
+  list: PropTypes.array.isRequired
 };
 
 function mapStateToProps(state, ownProps) {

@@ -18,5 +18,9 @@ class WordListItem extends React.PureComponent {
 
 }
 
+WordListItem.propTypes = {
+  word: PropTypes.string.isRequired,
+  remove: PropTypes.func.isRequired
+};
 
 export default WordListItem;
