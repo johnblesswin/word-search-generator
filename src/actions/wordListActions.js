@@ -1,3 +1,11 @@
-export function addWord(word) {
-  return {type: 'ADD_WORD', word};
+export function typeWord(word) {
+  return {type: 'TYPE_WORD', payload: {word}};
+}
+
+export function submitWord(word) {
+  return {type: 'SUBMIT_WORD', payload: {word}};
+}
+
+export function removeWord(word) {
+  return {type: 'REMOVE_WORD', payload: {word}};
 }

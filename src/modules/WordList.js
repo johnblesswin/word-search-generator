@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import * as wordListActions from '../actions/wordListActions';
 import { connect } from 'react-redux';
 import { Input } from 'semantic-ui-react';
+import WordListItem from './WordListItem';
 
 class WordList extends React.Component {
 
@@ -12,49 +13,63 @@ class WordList extends React.Component {
 
     this.state = {typedWord: ''};
 
-    this.addWord = this.addWord.bind(this);
+    this.submitWord = this.submitWord.bind(this);
     this.typeWord = this.typeWord.bind(this);
     this.keyDown = this.keyDown.bind(this);
+    this.removeWord = this.removeWord.bind(this);
   }
 
-  addWord() {
-    this.props.actions.addWord(this.state.typedWord);
-    this.setState({typedWord: ''});
+  submitWord() {
+    this.props.actions.submitWord();
   }
 
   typeWord(event, {value}) {
-    this.setState({typedWord: value});
+    this.props.actions.typeWord(value);
   }
 
   keyDown({keyCode}) {
     // Trigger word adding on Enter:
-    if (keyCode == 13) this.addWord();
+    if (keyCode == 13) this.submitWord();
+  }
+
+  removeWord(word) {
+    this.props.actions.removeWord(word);
   }
 
   render() {
     return (
-      <Input
-        size='large'
-        action={{ onClick: this.addWord,  color: 'brown', labelPosition: 'right', icon: 'add square', content: 'Add' }}
-        actionPosition='left'
-        placeholder='New word...'
-        onChange={this.typeWord}
-        onKeyDown={this.keyDown}
-        value={this.state.typedWord}
-      />
+      <React.Fragment>
+        <Input
+          size='large'
+          action={{ onClick: this.submitWord,  color: 'brown', labelPosition: 'right', icon: 'add square', content: 'Add' }}
+          actionPosition='left'
+          placeholder='New word...'
+          onChange={this.typeWord}
+          onKeyDown={this.keyDown}
+          value={this.props.currentlyTyped.word}
+        />
+        <ul>
+          {this.props.list.map(item =>
+            <WordListItem key={item.word} word={item.word} remove={this.removeWord} />
+          )}
+        </ul>
+      </React.Fragment>
     );
   }
 
 }
 
-WordList.propTypes = {
+/*WordList.propTypes = {
   actions: PropTypes.object.isRequired,
   words: PropTypes.array.isRequred
-};
+};*/
 
 function mapStateToProps(state, ownProps) {
   return {
-    words: state.words
+  //  state: state.words,
+    currentlyTyped: state.words.currentlyTyped,
+    list: state.words.list,
+    count: state.words.__count
   };
 }
 
