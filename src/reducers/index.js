@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import words from './wordListReducer';
+import words from './wordsReducer';
+import grid from './gridSetupReducer';
 
 const rootReducer = combineReducers({
-  words
+  words,
+  grid
 });
 
 export default rootReducer;

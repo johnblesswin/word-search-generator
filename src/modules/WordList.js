@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
+import * as wordListActions from '../actions/wordListActions';
 import { connect } from 'react-redux';
 import { Input } from 'semantic-ui-react';
 
@@ -17,6 +18,7 @@ class WordList extends React.Component {
   }
 
   addWord() {
+    this.props.actions.addWord(this.state.typedWord);
     this.setState({typedWord: ''});
   }
 
@@ -46,7 +48,7 @@ class WordList extends React.Component {
 }
 
 WordList.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  actions: PropTypes.object.isRequired,
   words: PropTypes.array.isRequred
 };
 
@@ -57,7 +59,9 @@ function mapStateToProps(state, ownProps) {
 }
 
 function mapDispatchToProps(dispatch) {
-
+  return {
+    actions: bindActionCreators(wordListActions, dispatch)
+  };
 }
 
-export default connect(mapStateToProps/*, mapDispatchToProps*/)(WordList);
+export default connect(mapStateToProps, mapDispatchToProps)(WordList);
