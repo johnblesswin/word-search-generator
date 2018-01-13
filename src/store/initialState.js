@@ -17,17 +17,22 @@ const words = {
   errors: []
 };
 
-const settings = {
-
+const grid = {
+  cell: {
+    min: appConfig.gridCell.min,
+    max: appConfig.gridCell.max,
+    size: appConfig.gridCell.default,
+  },
 };
 
 const lang = {
-
+  messages: languages[appConfig.defaultLanguage].messages,
+  current: appConfig.defaultLanguage,
+  languages: languages
 };
 
 export default {
-  settings,
   lang,
   words,
-  grid: null
+  grid
 };
