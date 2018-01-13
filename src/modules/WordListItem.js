@@ -5,7 +5,7 @@ import { List, Button } from 'semantic-ui-react';
 class WordListItem extends React.PureComponent {
 
   render() {
-    console.log('list item renderd!');
+    console.log('list item rendered!');
 
     return (
       <List.Item>
@@ -20,7 +20,8 @@ class WordListItem extends React.PureComponent {
 
 WordListItem.propTypes = {
   word: PropTypes.string.isRequired,
-  remove: PropTypes.func.isRequired
+  remove: PropTypes.func.isRequired,
+  circleOut: PropTypes.func.isRequired
 };
 
 export default WordListItem;

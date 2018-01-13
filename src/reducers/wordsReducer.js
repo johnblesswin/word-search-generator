@@ -19,23 +19,29 @@ export default function wordsReducer(state = initialState, action) {
 
   switch (action.type) {
     case 'TYPE_WORD': {
-      return Object.assign({}, state, {currentlyTyped: validateWord(action.payload.word)});
+      return {
+        ...state,
+        currentlyTyped: validateWord(action.payload.word)
+      };
     }
     case 'SUBMIT_WORD': {
       const newWord = validateWord(state.currentlyTyped.word);
       if (newWord.isValid) {
-        return Object.assign({}, state, {
+        return {
+          ...state,
           list: [...state.list, newWord],
-          currentlyTyped: Object.assign({}, initialState.currentlyTyped),
-          //letterCount: countLetters(state.list),
+          currentlyTyped: initialState.currentlyTyped,
+          letterCount: countLetters(state.list),
           touched: true
-        });
+        };
       }
       break;
     }
     case 'REMOVE_WORD': {
-      const newList = state.list.filter(item => item.word !== action.payload.word);
-      return Object.assign({}, state, {list: newList});
+      return {
+        ...state,
+        list:  state.list.filter(item => item.word !== action.payload.word)
+      };
     }
     case 'CIRCLE_WORD': break;
   }

@@ -17,8 +17,11 @@ class WordList extends React.Component {
   }
 
   keyDown = ({keyCode}) => {
-    // Trigger word adding on Enter:
-    if (keyCode == 13) this.submitWord();
+    if (keyCode === 13) this.submitWord(); // Trigger submit on <Enter>
+  }
+
+  circleOutWord = (word) => {
+    //this.props.actions.circleOutWord(word);
   }
 
   removeWord = (word) => {
@@ -39,7 +42,7 @@ class WordList extends React.Component {
         />
         <List celled>
           {this.props.list.map(item =>
-            <WordListItem key={item.word} word={item.word} remove={this.removeWord} />
+            <WordListItem key={item.word} word={item.word} remove={this.removeWord} circleOut={this.circleOutWord} />
           )}
         </List>
       </React.Fragment>
