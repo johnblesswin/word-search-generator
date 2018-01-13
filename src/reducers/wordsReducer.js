@@ -1,27 +1,11 @@
-const initialState = {
-  list: [],
-  currentlyTyped: {
-    word: '',
-    isTooLong: false,
-    isTooShort: true,
-    hasInvalidChars: false,
-    isValid: true,
-    errors: []
-  },
-  letterCount: 0,
-  touched: false,
-  locked: false,
-  errors: []
-};
-
-export default function wordsReducer(state = initialState, action) {
+export default function wordsReducer(state = null, action) {
 
 
   switch (action.type) {
     case 'TYPE_WORD': {
       return {
         ...state,
-        currentlyTyped: validateWord(action.payload.word)
+        currentlyTyped: validateWord(action.payload.word.toLowerCase())
       };
     }
     case 'SUBMIT_WORD': {
