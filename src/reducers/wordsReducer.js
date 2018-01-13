@@ -1,5 +1,6 @@
-export default function wordsReducer(state = null, action) {
+import { words as initialState } from '../store/initialState';
 
+export default function wordsReducer(state = initialState, action) {
 
   switch (action.type) {
     case 'TYPE_WORD': {
@@ -14,7 +15,14 @@ export default function wordsReducer(state = null, action) {
         return {
           ...state,
           list: [...state.list, newWord],
-          currentlyTyped: initialState.currentlyTyped,
+          currentlyTyped: {
+            word: '',
+            isTooLong: false,
+            isTooShort: true,
+            hasInvalidChars: false,
+            isValid: true,
+            errors: []
+          },
           letterCount: countLetters(state.list),
           touched: true
         };

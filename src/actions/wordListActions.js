@@ -1,4 +1,4 @@
-export function typeWord(word) {
+export function _typeWord(word) {
   return {type: 'TYPE_WORD', payload: {word}};
 }
 

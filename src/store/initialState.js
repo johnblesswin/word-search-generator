@@ -1,7 +1,7 @@
 import appConfig from '../AppConfig';
 import languages from '../languages';
 
-const words = {
+export const words = {
   list: [],
   currentlyTyped: {
     word: '',
@@ -14,10 +14,12 @@ const words = {
   letterCount: 0,
   touched: false,
   locked: false,
+  maxLength: null,
+  charset: [],
   errors: []
 };
 
-const grid = {
+export const grid = {
   cell: {
     min: appConfig.gridCell.min,
     max: appConfig.gridCell.max,
@@ -25,7 +27,7 @@ const grid = {
   },
 };
 
-const lang = {
+export const lang = {
   messages: languages[appConfig.defaultLanguage].messages,
   current: appConfig.defaultLanguage,
   languages: languages
