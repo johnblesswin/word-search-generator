@@ -14,8 +14,8 @@ export const words = {
   letterCount: 0,
   touched: false,
   locked: false,
-  maxLength: null,
-  charset: [],
+  maxLength: 100 / appConfig.gridCell.default,
+  charset: languages[appConfig.defaultLanguage].charset,
   errors: []
 };
 

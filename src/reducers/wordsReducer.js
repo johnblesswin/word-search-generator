@@ -1,44 +1,13 @@
 import { words as initialState } from '../store/initialState';
 
 export default function wordsReducer(state = initialState, action) {
-
   switch (action.type) {
-    case 'TYPE_WORD': {
-      return {
-        ...state,
-        currentlyTyped: validateWord(action.payload.word.toLowerCase())
-      };
-    }
-    case 'SUBMIT_WORD': {
-      const newWord = validateWord(state.currentlyTyped.word);
-      if (newWord.isValid) {
-        return {
-          ...state,
-          list: [...state.list, newWord],
-          currentlyTyped: {
-            word: '',
-            isTooLong: false,
-            isTooShort: true,
-            hasInvalidChars: false,
-            isValid: true,
-            errors: []
-          },
-          letterCount: countLetters(state.list),
-          touched: true
-        };
-      }
-      break;
-    }
-    case 'REMOVE_WORD': {
-      return {
-        ...state,
-        list:  state.list.filter(item => item.word !== action.payload.word)
-      };
-    }
-    case 'CIRCLE_WORD': break;
+    case 'TYPE_WORD': return typeWord(state, action.payload.word);
+    case 'SUBMIT_WORD': return submitWord(state, state.currentlyTyped.word);
+    case 'REMOVE_WORD': return removeWord(state, action.payload.word);
+    case 'CIRCLE_WORD': return circleWord(state, action.payload.word);
+    default: return state;
   }
-
-  return state;
 }
 
 function countLetters(words) {
@@ -58,18 +27,41 @@ function validateWord(word, maxLength, allowedChars) {
   };
 }
 
-function typeWord(word) {
-
+function typeWord(state, word) {
+  return {
+    ...state,
+    currentlyTyped: validateWord(word.toLowerCase())
+  };
 }
 
-function submitWord() {
-
+function submitWord(state, word) {
+  const newWord = validateWord(word);
+  if (newWord.isValid) {
+    return {
+      ...state,
+      list: [...state.list, newWord],
+      currentlyTyped: {
+        word: '',
+        isTooLong: false,
+        isTooShort: true,
+        hasInvalidChars: false,
+        isValid: true,
+        errors: []
+      },
+      letterCount: countLetters(state.list),
+      touched: true
+    };
+  }
+  return state;
 }
 
-function removeWord(key) {
-
+function removeWord(state, word) {
+  return {
+    ...state,
+    list:  state.list.filter(item => item.word !== word)
+  };
 }
 
-function circleWord(key) {
+function circleWord(state, word) {
 
 }
