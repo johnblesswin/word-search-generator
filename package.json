@@ -1,5 +1,8 @@
 {
   "name": "sample-app",
+  "jest": {
+    "verbose": false
+  },
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -34,6 +37,7 @@
     "eslint-plugin-class-property": "^1.1.0",
     "file-loader": "^1.1.6",
     "image-webpack-loader": "^3.4.2",
+    "jest": "^22.0.6",
     "react-transform-hmr": "^1.0.4",
     "redux-devtools-extension": "^2.13.2",
     "style-loader": "^0.19.1",
@@ -42,7 +46,9 @@
     "webpack-dev-server": "^2.10.0"
   },
   "scripts": {
-    "start": "npm run build",
+    "start": "webpack-dev-server",
+    "test": "jest --silent",
+    "test:watch": "jest --watch",
     "build": "webpack -d && cp src/index.html dist/index.html && webpack-dev-server --content-base src/ --inline --hot --history-api-fallback",
     "build:prod": "webpack -p && cp src/index.html dist/index.html"
   }
