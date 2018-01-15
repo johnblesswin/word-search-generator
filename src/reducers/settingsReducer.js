@@ -1,4 +1,4 @@
-import { grid as initialState } from '../store/initialState';
+import { settings as initialState } from '../store/initialState';
 
 export default function gridSetupReducer(state = initialState, action) {
   switch (action.type) {

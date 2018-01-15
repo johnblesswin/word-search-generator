@@ -19,22 +19,20 @@ export const words = {
   errors: []
 };
 
-export const grid = {
-  cell: {
-    min: appConfig.gridCell.min,
-    max: appConfig.gridCell.max,
-    size: appConfig.gridCell.default,
+export const settings = {
+  grid: {
+    cell: {
+      min: appConfig.gridCell.min,
+      max: appConfig.gridCell.max,
+      size: appConfig.gridCell.default,
+    },
+    touched: true
   },
+  language: {
+    current: appConfig.defaultLanguage,
+    messages: languages[appConfig.defaultLanguage].messages,
+    languages: languages
+  }
 };
 
-export const language = {
-  current: appConfig.defaultLanguage,
-  messages: languages[appConfig.defaultLanguage].messages,
-  languages: languages
-};
-
-export default {
-  language,
-  words,
-  grid
-};
+export const puzzle = {};

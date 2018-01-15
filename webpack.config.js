@@ -18,8 +18,7 @@ module.exports = {
     historyApiFallback: true
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.HotModuleReplacementPlugin()
   ],
   module: {
     loaders: [

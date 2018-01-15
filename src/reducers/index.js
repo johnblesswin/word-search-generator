@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 import words from './wordsReducer';
-import grid from './gridSetupReducer';
-import lang from './languageReducer';
+import settings from './settingsReducer';
+import puzzle from './puzzleGeneratorReducer';
 
 const rootReducer = combineReducers({
   words,
-  grid,
-  lang
+  settings,
+  puzzle
 });
 
 export default rootReducer;
