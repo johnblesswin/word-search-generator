@@ -1,7 +1,7 @@
 {
   "name": "sample-app",
   "jest": {
-    "verbose": false
+    "verbose": true
   },
   "version": "0.1.0",
   "private": true,
@@ -48,7 +48,7 @@
   "scripts": {
     "start": "webpack-dev-server",
     "test": "jest --silent",
-    "test:watch": "jest --watch",
+    "test:watch": "jest --watch --noStackTrace",
     "build": "webpack -d && cp src/index.html dist/index.html && webpack-dev-server --content-base src/ --inline --hot --history-api-fallback",
     "build:prod": "webpack -p && cp src/index.html dist/index.html"
   }

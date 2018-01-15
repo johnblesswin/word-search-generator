@@ -7,6 +7,8 @@ export default function wordsReducer(state = initialState, action) {
     case 'SUBMIT_WORD': return submitWord(state, state.currentlyTyped.word);
     case 'REMOVE_WORD': return removeWord(state, action.payload.word);
     case 'CIRCLE_WORD': return circleWord(state, action.payload.word);
+    case 'CHANGE_CHARSET': return state;
+    case 'CHANGE_MAX_LENGTH': return state;
     default: return state;
   }
 }
@@ -64,5 +66,5 @@ function removeWord(state, word) {
 }
 
 function circleWord(state, word) {
-
+  return state;
 }
