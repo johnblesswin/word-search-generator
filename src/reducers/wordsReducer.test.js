@@ -2,9 +2,14 @@ import wordsReducer from './wordsReducer';
 import { words as initialState } from '../store/initialState';
 import * as actions from '../actions/wordListActions';
 
-describe('word list reducer', () => {
+let state, action;
 
-  let state, action;
+beforeEach(() => {
+  state = {...initialState};
+  action = null;
+});
+
+describe('word list reducer', () => {
 
   it('returns the initial state', () => {
     expect(
@@ -15,7 +20,6 @@ describe('word list reducer', () => {
   });
 
   it('returns the state unchanged if the "locked" flag is set to true', () => {
-    state = {...initialState};
     // Enable the locked flag
     state.locked = true;
     // Try typing a word
@@ -27,7 +31,6 @@ describe('word list reducer', () => {
   });
 
   it('correctly registers the word being typed', () => {
-    state = {...initialState};
     // Type a word
     action = actions.typeWord(' SampleWord    ');
     state = wordsReducer(state, action);
@@ -37,7 +40,6 @@ describe('word list reducer', () => {
   });
 
   it('does not add the submitted word if it is too long, and adds the relevant error flag', () => {
-    state = {...initialState};
     // Define max word length
     action = actions.changeMaxLength(5);
     state = wordsReducer(state, action);
@@ -56,7 +58,6 @@ describe('word list reducer', () => {
   });
 
   it('does not add the submitted word if it has characters from outside the charset', () => {
-    state = {...initialState};
     // Define the charset
     action = actions.changeCharset(['a', 'b', 'c']);
     state = wordsReducer(state, action);
@@ -67,12 +68,11 @@ describe('word list reducer', () => {
     action = actions.submitWord();
     state = wordsReducer(state, action);
     // Check the word list
-    expect(state.list.length)
-      .toBe(0); // no words
+    expect(state.list)
+      .toHaveLength(0); // no words
   });
 
   it('does not add the submitted word if it already exists', () => {
-    state = {...initialState};
     // Type a word and add it to the list
     action = actions.typeWord('word');
     state = wordsReducer(state, action);
@@ -84,27 +84,25 @@ describe('word list reducer', () => {
     action = actions.submitWord();
     state = wordsReducer(state, action);
     // Check the word list
-    expect(state.list.length)
-      .toBe(1); // no words
+    expect(state.list)
+      .toHaveLength(1); // one word only
   });
 
   it('adds the submitted word to the list if there are no errors, and sets the "touched" flag to true', () => {
-    state = {...initialState};
     // Type a word and add it to the list
     action = actions.typeWord('word');
     state = wordsReducer(state, action);
     action = actions.submitWord();
     state = wordsReducer(state, action);
     // Check the word list
-    expect(state.list.length)
-      .toBe(1); // one word
+    expect(state.list)
+      .toHaveLength(1); // one word
     // Check the touched flag
     expect(state.touched)
       .toBe(true);
   });
 
   it('removes the selected word from the list', () => {
-    state = {...initialState};
     // Type a word and add it to the list
     action = actions.typeWord('word');
     state = wordsReducer(state, action);
@@ -116,12 +114,11 @@ describe('word list reducer', () => {
     action = actions.removeWord('word');
     state = wordsReducer(state, action);
     // Check the word list
-    expect(state.list.length)
-      .toBe(0); // no words
+    expect(state.list)
+      .toHaveLength(0); // no words
   });
 
   it('marks the selected word as circled, and turns off the circled flag on all the other words', () => {
-    state = {...initialState};
     // Type a word and add it to the list
     action = actions.typeWord('word');
     state = wordsReducer(state, action);
@@ -147,7 +144,6 @@ describe('word list reducer', () => {
   });
 
   it('validates the existing words against new properties', () => {
-    state = {...initialState};
     // Type a word and add it to the list
     action = actions.typeWord('word');
     state = wordsReducer(state, action);

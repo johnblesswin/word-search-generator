@@ -12,7 +12,7 @@ export const words = {
     errors: []
   },
   letterCount: 0,
-  touched: false,
+  touched: true,
   locked: false,
   maxLength: 100 / appConfig.gridCell.default,
   charset: languages[appConfig.defaultLanguage].charset,
@@ -27,14 +27,14 @@ export const grid = {
   },
 };
 
-export const lang = {
-  messages: languages[appConfig.defaultLanguage].messages,
+export const language = {
   current: appConfig.defaultLanguage,
+  messages: languages[appConfig.defaultLanguage].messages,
   languages: languages
 };
 
 export default {
-  lang,
+  language,
   words,
   grid
 };
