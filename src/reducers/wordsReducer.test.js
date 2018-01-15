@@ -1,5 +1,6 @@
 import wordsReducer from './wordsReducer';
-import initialState from '../store/initialState';
+import { words as initialState } from '../store/initialState';
+import * as actions from '../actions/wordListActions';
 
 describe('word list reducer', () => {
 
@@ -7,11 +8,19 @@ describe('word list reducer', () => {
     expect(
       wordsReducer(undefined, {})
     ).toEqual(
-      initialState.words
+      initialState
     );
   });
 
-  it('returns the state unchanged if the "locked" flag is set to true');
+  it('returns the state unchanged if the "locked" flag is set to true', () => {
+
+    const mockState = {...initialState, locked: true};
+    const mockAction = actions.typeWord('word');
+
+    expect(
+      wordsReducer(mockState, mockAction)
+    ).toEqual(mockState);
+  });
 
   it('inserts the word being typed into the new state');
 

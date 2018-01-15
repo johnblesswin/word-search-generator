@@ -1,6 +1,7 @@
 import { words as initialState } from '../store/initialState';
 
 export default function wordsReducer(state = initialState, action) {
+  if (state.locked === true) return state;
   switch (action.type) {
     case 'TYPE_WORD': return typeWord(state, action.payload.word);
     case 'SUBMIT_WORD': return submitWord(state, state.currentlyTyped.word);
