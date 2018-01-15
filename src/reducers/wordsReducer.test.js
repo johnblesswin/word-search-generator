@@ -13,24 +13,39 @@ describe('word list reducer', () => {
   });
 
   it('returns the state unchanged if the "locked" flag is set to true', () => {
-
-    const mockState = {...initialState, locked: true};
-    const mockAction = actions.typeWord('word');
-
+    const state = {...initialState, locked: true};
+    const action = actions.typeWord('word');
     expect(
-      wordsReducer(mockState, mockAction)
-    ).toEqual(mockState);
+      wordsReducer(state, action)
+    ).toEqual(state);
   });
 
-  it('inserts the word being typed into the new state');
+  it('correctly registers the word being typed', () => {
+    const state = {...initialState};
+    const action = actions.typeWord(' SampleWord  ');
+    expect(
+      wordsReducer(state, action)
+        .typedWord
+        .word
+    ).toBe('sampleword');
+  });
 
-  it('does not add the submitted word if it is too long, and adds the relevant error flag');
+  it('does not add the submitted word if it is too long, and adds the relevant error flag', () => {
+    const state = {
+      ...initialState,
+      maxLength: 5};
+    state.typedWord.word = 'wordthatistoolong';
+    const action = actions.addWord(),
+      result = wordsReducer(state, action);
+    expect(result.list.length).toBe(0);
+    expect(result.typedWord.errors).toContain('SUBMITTED_WORD_TOO_LONG');
+  });
 
   it('does not add the submitted word if it has characters from outside the charset');
 
   it('removes any errors once a previously invalid word becomes valid');
 
-  it('does not add the submitted word if it exists');
+  it('does not add the submitted word if it already exists');
 
   it('adds the submitted word to the list if there are no errors, and sets the "touched" flag to true');
 
