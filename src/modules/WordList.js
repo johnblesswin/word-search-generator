@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
-import * as wordListActions from '../actions/wordListActions';
+import * as actions from '../actions';
 import { connect } from 'react-redux';
 import { Input, List } from 'semantic-ui-react';
 import WordListItem from './WordListItem';
@@ -66,7 +66,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(wordListActions, dispatch)
+    actions: bindActionCreators(actions, dispatch)
   };
 }
 
