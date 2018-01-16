@@ -5,7 +5,7 @@ export function typeWord(word) {
 }
 
 export function submitWord(word) {
-  return {type: 'SUBMIT_WORD', payload: {word}};
+  return {type: 'SUBMIT_WORD'};
 }
 
 export function removeWord(word) {

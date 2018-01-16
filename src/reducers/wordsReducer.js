@@ -7,11 +7,11 @@ export default function wordsReducer(state = initialState, action) {
     case 'SUBMIT_WORD': return submitWord(state, state.currentlyTyped.word);
     case 'REMOVE_WORD': return removeWord(state, action.payload.word);
     case 'CIRCLE_WORD': return circleWord(state, action.payload.word);
-    case 'SWITCH_LANGUAGE': return state; // touch, revalidate
-    case 'SET_GRID_SIZE': return state; // touch, revalidate
-    case 'PUZZLE_IS_BEING_GENERATED': return state;
-    case 'PUZZLE_GENERATED': return state; // untouch
-    case 'ERROR_GENERATING_PUZZLE': return state;
+    case 'SWITCH_LANGUAGE': return switchLanguage(state);
+    case 'SET_GRID_SIZE': return setGridSize(state);
+    case 'PUZZLE_IS_BEING_GENERATED': return puzzleIsBeingGenerated(state);
+    case 'PUZZLE_GENERATED': return puzzleGenerated(state);
+    case 'ERROR_GENERATING_PUZZLE': return errorGeneratingPuzzle(state);
     default: return state;
   }
 }
@@ -62,6 +62,7 @@ function submitWord(state, word) {
 }
 
 function removeWord(state, word) {
+  // touch
   return {
     ...state,
     list:  state.list.filter(item => item.word !== word)
@@ -69,5 +70,34 @@ function removeWord(state, word) {
 }
 
 function circleWord(state, word) {
+  // touch
+  return state;
+}
+
+function switchLanguage(state) {
+  // - switch current charset
+  // - revalidate the word list
+  return state;
+}
+
+function setGridSize(state) {
+  // - calculate max word length
+  // - revalidate the word list
+  return state;
+}
+
+function puzzleIsBeingGenerated(state) {
+  // - lock
+  return state;
+}
+
+function puzzleGenerated(state) {
+  // - set as untouched
+  // - unlock
+  return state;
+}
+
+function errorGeneratingPuzzle(state) {
+  // - unlock
   return state;
 }
