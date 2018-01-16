@@ -1,6 +1,8 @@
 import appConfig from '../AppConfig';
 import languages from '../languages';
 
+const defaultLang = appConfig.defaultLanguage;
+
 export const words = {
   list: [],
   currentlyTyped: {
@@ -15,8 +17,14 @@ export const words = {
   touched: true,
   locked: false,
   maxLength: 100 / appConfig.gridCell.default,
-  charset: languages[appConfig.defaultLanguage].charset,
-  errors: []
+  charset: languages[defaultLang].charset,
+  errors: [],
+  // Extracts only charsets from the language data
+  charsets: Object.entries(languages).reduce(
+    (charsets, [langCode, {charset}]) => {
+      charsets[langCode] = charset;
+      return charsets;
+    }, {})
 };
 
 export const settings = {
@@ -30,7 +38,7 @@ export const settings = {
   },
   language: {
     current: appConfig.defaultLanguage,
-    messages: languages[appConfig.defaultLanguage].messages,
+    messages: languages[defaultLang].messages,
     languages: languages
   }
 };
