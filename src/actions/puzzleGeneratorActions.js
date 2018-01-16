@@ -2,7 +2,7 @@ import generateWordSearch from '../services/generateWordSearch';
 
 export function requestPuzzle() {
   return (dispatch, getState) => {
-    if(getState().grid.settings.touched || getState().words.touched) {
+    if(getState().settings.grid.touched || getState().words.touched) {
 
       dispatch({type: 'PUZZLE_IS_BEING_GENERATED'});
       generateWordSearch(/* */)

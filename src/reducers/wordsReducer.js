@@ -7,8 +7,11 @@ export default function wordsReducer(state = initialState, action) {
     case 'SUBMIT_WORD': return submitWord(state, state.currentlyTyped.word);
     case 'REMOVE_WORD': return removeWord(state, action.payload.word);
     case 'CIRCLE_WORD': return circleWord(state, action.payload.word);
-    case 'CHANGE_CHARSET': return state;
-    case 'CHANGE_MAX_LENGTH': return state;
+    case 'SWITCH_LANGUAGE': return state; // touch, revalidate
+    case 'SET_GRID_SIZE': return state; // touch, revalidate
+    case 'PUZZLE_IS_BEING_GENERATED': return state;
+    case 'PUZZLE_GENERATED': return state; // untouch
+    case 'ERROR_GENERATING_PUZZLE': return state;
     default: return state;
   }
 }
