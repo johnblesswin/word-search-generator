@@ -2,13 +2,26 @@ import wordsReducer from './wordsReducer';
 import { words as initialState } from '../store/initialState';
 import * as actions from '../actions';
 
-let state, action;
+const helpers = {
+
+  addWord(word, state) {
+    const intermediateState = wordsReducer(state, actions.typeWord(word));
+    return wordsReducer(intermediateState, actions.submitWord());
+  }
+
+};
 
 describe('word list reducer', () => {
 
+  let state, action;
+
   beforeEach(() => {
-    state = {...initialState};
     action = null;
+    state = {
+      ...initialState,
+      charset: initialState.charsets.EN,
+      maxWordLength: 10
+    };
   });
 
   it('returns the initial state', () => {
@@ -42,12 +55,7 @@ describe('word list reducer', () => {
   it('does not add the submitted word if it is too long, and adds the relevant error flag', () => {
     // Limit max word length
     state.maxWordLength = 5;
-    // Type aw word
-    action = actions.typeWord('awordthatistoolong');
-    state = wordsReducer(state, action);
-    // Submit the word
-    action = actions.submitWord();
-    state = wordsReducer(state, action);
+    state = helpers.addWord('supercalifragilisticexpialidocious', state);
     // Check the word list
     expect(state.list.length)
       .toBe(0); // no words
@@ -57,14 +65,9 @@ describe('word list reducer', () => {
   });
 
   it('does not add the submitted word if it has characters from outside the charset', () => {
-    // Define the charset
     state.charset = ['a', 'b', 'c'];
-    // Type a word
-    action = actions.typeWord('abcd');
-    state = wordsReducer(state, action);
-    // Submit the word
-    action = actions.submitWord();
-    state = wordsReducer(state, action);
+    // Try adding a word with a letter from outside the charset
+    state = helpers.addWord('abcd', state);
     // Check the word list
     expect(state.list)
       .toHaveLength(0); // no words
@@ -72,26 +75,17 @@ describe('word list reducer', () => {
 
   it('does not add the submitted word if it already exists', () => {
     // Type a word and add it to the list
-    action = actions.typeWord('word');
-    state = wordsReducer(state, action);
-    action = actions.submitWord();
-    state = wordsReducer(state, action);
+    state = helpers.addWord('word', state);
     // Try adding the same word again
-    action = actions.typeWord('word');
-    state = wordsReducer(state, action);
-    action = actions.submitWord();
-    state = wordsReducer(state, action);
+    state = helpers.addWord('wordtwo', state);
     // Check the word list
     expect(state.list)
       .toHaveLength(1); // one word only
   });
 
   it('adds the submitted word to the list if there are no errors, and sets the "touched" flag to true', () => {
-    // Type a word and add it to the list
-    action = actions.typeWord('word');
-    state = wordsReducer(state, action);
-    action = actions.submitWord();
-    state = wordsReducer(state, action);
+    state.touched = false;
+    state = helpers.addWord('word', state);
     // Check the word list
     expect(state.list)
       .toHaveLength(1); // one word
@@ -101,11 +95,7 @@ describe('word list reducer', () => {
   });
 
   it('removes the selected word from the list', () => {
-    // Type a word and add it to the list
-    action = actions.typeWord('word');
-    state = wordsReducer(state, action);
-    action = actions.submitWord();
-    state = wordsReducer(state, action);
+    state = helpers.addWord('word', state);
     // Check the word list
     expect(state.list.length)
       .toBe(1); // one word
@@ -117,16 +107,8 @@ describe('word list reducer', () => {
   });
 
   it('marks the selected word as circled, and turns off the circled flag on all the other words', () => {
-    // Type a word and add it to the list
-    action = actions.typeWord('word');
-    state = wordsReducer(state, action);
-    action = actions.submitWord();
-    state = wordsReducer(state, action);
-    // Type another word and add it to the list
-    action = actions.typeWord('anotherword');
-    state = wordsReducer(state, action);
-    action = actions.submitWord();
-    state = wordsReducer(state, action);
+    state = helpers.addWord('word', state);
+    state = helpers.addWord('anotherword', state);
     // Mark the first word as circled out
     action = actions.circleWord('word');
     state = wordsReducer(state, action);
@@ -142,22 +124,17 @@ describe('word list reducer', () => {
   });
 
   it('validates the existing words against new properties', () => {
-    // Type a word and add it to the list
-    action = actions.typeWord('abcd');
+    // Type a five-letter word and add it to the list
+    state = helpers.addWord('abcde', state);
+    // Type a six-letter word and add it to the list
+    state = helpers.addWord('abcdef', state);
+    // Set the grid size to 20: this will set maxWordSize to 5 ()
+    action = actions.setGridSize(20);
     state = wordsReducer(state, action);
-    action = actions.submitWord();
-    state = wordsReducer(state, action);
-    // Type another word and add it to the list
-    action = actions.typeWord('abcde');
-    state = wordsReducer(state, action);
-    action = actions.submitWord();
-    state = wordsReducer(state, action);
-    // Limit max word length
-    state.maxWordLength = 4;
-    // The first word should still be valid:
+    // The first word should still be valid
     expect(state.list[0].isValid)
       .toBe(true);
-    // The second word should not be valid:
+    // The second word should not be valid
     expect(state.list[1].isValid)
       .toBe(false);
   });
@@ -174,5 +151,11 @@ describe('word list reducer', () => {
     expect(state.charset)
       .toEqual(state.charsets.EN);
   });
+
+  it('locks while the puzzle is being generated');
+  it('unlocks once the puzzle has been generated');
+  it('disables the touch flag once the puzzle has been generated');
+  it('unlocks on puzzle generator error');
+  it('retains the touch flag on puzzle generator error');
 
 });
