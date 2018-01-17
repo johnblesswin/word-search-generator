@@ -1,15 +1,15 @@
 import wordsReducer from './wordsReducer';
 import { words as initialState } from '../store/initialState';
-import * as actions from '../actions/wordListActions';
+import * as actions from '../actions';
 
 let state, action;
 
-beforeEach(() => {
-  state = {...initialState};
-  action = null;
-});
-
 describe('word list reducer', () => {
+
+  beforeEach(() => {
+    state = {...initialState};
+    action = null;
+  });
 
   it('returns the initial state', () => {
     expect(
@@ -40,9 +40,8 @@ describe('word list reducer', () => {
   });
 
   it('does not add the submitted word if it is too long, and adds the relevant error flag', () => {
-    // Define max word length
-    action = actions.changeMaxLength(5);
-    state = wordsReducer(state, action);
+    // Limit max word length
+    state.maxWordLength = 5;
     // Type aw word
     action = actions.typeWord('awordthatistoolong');
     state = wordsReducer(state, action);
@@ -53,14 +52,13 @@ describe('word list reducer', () => {
     expect(state.list.length)
       .toBe(0); // no words
     // Check the error flag existence
-    expect(result.typedWord.errors)
+    expect(result.currentlyTyped.errors)
       .toContain('SUBMITTED_WORD_TOO_LONG');
   });
 
   it('does not add the submitted word if it has characters from outside the charset', () => {
     // Define the charset
-    action = actions.changeCharset(['a', 'b', 'c']);
-    state = wordsReducer(state, action);
+    state.charset = ['a', 'b', 'c'];
     // Type a word
     action = actions.typeWord('abcd');
     state = wordsReducer(state, action);
@@ -145,24 +143,36 @@ describe('word list reducer', () => {
 
   it('validates the existing words against new properties', () => {
     // Type a word and add it to the list
-    action = actions.typeWord('word');
+    action = actions.typeWord('abcd');
     state = wordsReducer(state, action);
     action = actions.submitWord();
     state = wordsReducer(state, action);
     // Type another word and add it to the list
-    action = actions.typeWord('anotherword');
+    action = actions.typeWord('abcde');
     state = wordsReducer(state, action);
     action = actions.submitWord();
     state = wordsReducer(state, action);
-    // Define max word length
-    action = actions.changeMaxLength(5);
-    state = wordsReducer(state, action);
+    // Limit max word length
+    state.maxWordLength = 4;
     // The first word should still be valid:
     expect(state.list[0].isValid)
       .toBe(true);
     // The second word should not be valid:
     expect(state.list[1].isValid)
       .toBe(false);
+  });
+
+  it('switches the active charset on language change', () => {
+    // Switch to PL
+    action = actions.switchLanguage('PL');
+    state = wordsReducer(state, action);
+    expect(state.charset)
+      .toEqual(state.charsets.PL);
+    // Switch to EN
+    action = actions.switchLanguage('EN');
+    state = wordsReducer(state, action);
+    expect(state.charset)
+      .toEqual(state.charsets.EN);
   });
 
 });
