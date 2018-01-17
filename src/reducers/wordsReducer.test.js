@@ -123,12 +123,20 @@ describe('word list reducer', () => {
       .toBe(false);
   });
 
+  it('correctly calculates maxWordLength', () => {
+    // Set the grid size to 4: this will set maxWordSize to 25 (100/4 = 25)
+    action = actions.setGridSize(20);
+    state = wordsReducer(state, action);
+    expect(state.maxWordLength)
+      .toBe(25);
+  });
+
   it('validates the existing words against new properties', () => {
     // Type a five-letter word and add it to the list
     state = helpers.addWord('abcde', state);
     // Type a six-letter word and add it to the list
     state = helpers.addWord('abcdef', state);
-    // Set the grid size to 20: this will set maxWordSize to 5 ()
+    // Set the grid size to 20: this will set maxWordSize to 5 (100/20 = 5)
     action = actions.setGridSize(20);
     state = wordsReducer(state, action);
     // The first word should still be valid
@@ -152,10 +160,39 @@ describe('word list reducer', () => {
       .toEqual(state.charsets.EN);
   });
 
-  it('locks while the puzzle is being generated');
-  it('unlocks once the puzzle has been generated');
-  it('disables the touch flag once the puzzle has been generated');
-  it('unlocks on puzzle generator error');
-  it('retains the touch flag on puzzle generator error');
+  it('locks while the puzzle is being generated', () => {
+    state.locked = false;
+    state = wordsReducer(state, {type: 'PUZZLE_IS_BEING_GENERATED'});
+    expect(state.locked)
+      .toBe(true);
+  });
+
+  it('unlocks once the puzzle has been generated', () => {
+    state.locked = true;
+    state = wordsReducer(state, {type: 'PUZZLE_GENERATED'});
+    expect(state.locked)
+      .toBe(false);
+  });
+
+  it('disables the "touched" flag once the puzzle has been generated', () => {
+    state.touched = true;
+    state = wordsReducer(state, {type: 'PUZZLE_GENERATED'});
+    expect(state.touched)
+      .toBe(false);
+  });
+
+  it('unlocks on puzzle generator error', () => {
+    state.locked = true;
+    state = wordsReducer(state, {type: 'ERROR_GENERATING_PUZZLE'});
+    expect(state.locked)
+      .toBe(false);
+  });
+
+  it('retains the "touched" flag on puzzle generator error', () => {
+    state.touched = true;
+    state = wordsReducer(state, {type: 'ERROR_GENERATING_PUZZLE'});
+    expect(state.touched)
+      .toBe(true);
+  });
 
 });
