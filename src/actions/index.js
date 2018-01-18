@@ -4,7 +4,7 @@ export function typeWord(word) {
   return {type: 'TYPE_WORD', payload: {word}};
 }
 
-export function submitWord(word) {
+export function submitWord() {
   return {type: 'SUBMIT_WORD'};
 }
 
@@ -35,4 +35,8 @@ export function requestPuzzle() {
 
     }
   };
+}
+
+export function requestAnotherPuzzle() {
+  return requestPuzzle();
 }
