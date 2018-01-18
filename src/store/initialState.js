@@ -16,15 +16,15 @@ export const words = {
   letterCount: 0,
   touched: true,
   locked: false,
-  maxLength: 100 / appConfig.gridCell.default,
+  maxWordLength: 100 / appConfig.gridCell.default,
   charset: languages[defaultLang].charset,
   errors: [],
   // Extracts only charsets from the language data
-  charsets: Object.entries(languages).reduce(
-    (charsets, [langCode, {charset}]) => {
-      charsets[langCode] = charset;
+  charsets: Object.keys(languages).reduce(
+    (charsets, langCode) => {
+      charsets[langCode] = languages[langCode].charset;
       return charsets;
-    }, {})
+    }, {}),
 };
 
 export const settings = {
