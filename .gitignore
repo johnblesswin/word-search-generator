@@ -58,4 +58,10 @@ typings/
 .env
 
 # production
-/build
+dist
+
+#code sandbox
+sandbox
+
+#Visual Studio Code settings
+.vscode
