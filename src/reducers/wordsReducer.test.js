@@ -33,14 +33,14 @@ describe('word list reducer', () => {
   });
 
   it('returns the state unchanged if the "locked" flag is set to true', () => {
-    // Enable the locked flag
     state.locked = true;
+    const previousState = {...state};
     // Try typing a word
     action = actions.typeWord('word');
     state = wordsReducer(state, action);
     // Check if the state remains unchanged
     expect(state)
-      .toEqual(state);
+      .toEqual(previousState);
   });
 
   it('correctly registers the word being typed', () => {
