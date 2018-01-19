@@ -1,4 +1,4 @@
-import generateWordSearch from '../services/generateWordSearch';
+import generatePuzzle from '../services/generatePuzzle';
 
 export function typeWord(word) {
   return {type: 'TYPE_WORD', payload: {word}};
@@ -29,7 +29,7 @@ export function requestPuzzle() {
     if(getState().settings.grid.touched || getState().words.touched) {
 
       dispatch({type: 'PUZZLE_IS_BEING_GENERATED'});
-      generateWordSearch(/* */)
+      generatePuzzle(/* */)
         .then(puzzle => dispatch({type: 'PUZZLE_GENERATED', payload: {puzzle}}))
         .catch(error => dispatch({type: 'ERROR_GENERATING_PUZZLE', error}));
 

@@ -39,7 +39,8 @@ const grid = {
 
 };
 
-const words = ['rainy', 'snow', 'sunny', 'wind', 'chilly', 'freezing', 'skiing', 'chinchilla', 'hamster', 'rabbit', 'honeymoon'];
+const words = ['rainy', 'snow', 'sunny', 'wind', 'chilly', 'freezing', 'skiing', 'chinchilla', 'hamster', 'rabbit', 'honeymoon',
+'magazine', 'newspaper', 'computer', 'jarring', 'petulence', 'comparison', 'mismatching', 'scarcity', 'obesity', 'masterrace'];
 
 
 const charset = ['1', '2', '3', '4', '5'];
@@ -74,17 +75,6 @@ function _generate(grid, words, charset) {
 /*----------------------------------------------------------------------------------*/
 
   let b = boardWithWords.map(cell => cell ? '[' + cell + ']' : '[ ]');
-  /*console.log(
-
-    b[0] + b[1] + b[2] + b[3] + b[4] + "\n" +
-    b[5] + b[6] + b[7] + b[8] + b[9] + "\n" +
-    b[10] + b[11] + b[12] + b[13] + b[14] + "\n" +
-    b[15] + b[16] + b[17] + b[18] + b[19] + "\n" +
-    b[20] + b[21] + b[22] + b[23] + b[24]
-
-
-  );*/
-
 
   const width = grid.width;
   const height = grid.cells.length / width;
@@ -105,7 +95,7 @@ function _generate(grid, words, charset) {
 }
 
 /**
- * Note that <null> means an empty cell, and <false> means a disabled cell.
+ * Note that <null> means just an empty cell (which should be filled), and <false> means a disabled cell.
  * 
  * @param {Array} board partially filled board
  * @param {Array} charset charsters to fill the board with
