@@ -43,4 +43,10 @@ export const settings = {
   }
 };
 
-export const puzzle = {};
+export const puzzle = {
+  isReady: false,
+  isPending: false,
+  error: null,
+  board: {},
+  words: {}
+};
