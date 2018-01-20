@@ -1,10 +1,21 @@
 import React from 'react';
+import Board from './Board';
+
+// TO BE REMOVED
+import { sampleData } from '../../services/generatePuzzle/wordSearchGenerator';
 
 class WordSearchPuzzle extends React.Component {
 
   render() {
     return (
-      <p>Word search puzzle</p>
+      <div style={{margin: '15%'}}>
+        <Board 
+          letters={sampleData.cells}
+          words={sampleData.words}
+          cols={sampleData.boardWidth}
+          highlightWords={true}
+        />
+      </div>
     );
   }
 
