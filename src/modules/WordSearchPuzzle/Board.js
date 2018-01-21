@@ -66,9 +66,9 @@ class Board extends React.Component {
 
   getWordHighlights() {
     if (this.props.highlightWords) {
-      
-      return <WordHighlight cellSize={this.state.dimensions.cell} />;
-
+      return this.props.words.map(item => {
+        return <WordHighlight cellSize={this.state.dimensions.cell} word={item} key={item.word} />;
+      });
     }
   }
 
