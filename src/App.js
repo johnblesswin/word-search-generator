@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import * as actions from './actions';
 import { connect } from 'react-redux';
@@ -32,7 +32,7 @@ class App extends React.Component {
       <Layout
         menu={<Navigation />}
         navButtons={<Navigation navButtons />}
-        pageContent={this.getPageContent()}
+        pageContent={this.getPageContent}
       />
     );
   }
@@ -51,6 +51,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
-
-//export default App;
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
