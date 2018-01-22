@@ -34,6 +34,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-react-hmre": "^1.1.1",
+    "babel-preset-stage-1": "^6.24.1",
     "css-loader": "^0.28.8",
     "eslint-plugin-class-property": "^1.1.0",
     "file-loader": "^1.1.6",
