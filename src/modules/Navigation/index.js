@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { Steps, Button, Icon } from 'antd';
 import './Navigation.css';
@@ -20,27 +21,32 @@ class Navigation extends React.Component {
     }
 
     getStepper = () => {
-        const activeStep = this.getStep();
+        const activeStep = this.getStep(),
+        {lang} = this.props;
 
         return (
             <Steps current={activeStep} className="navigation-stepper">
-                <Steps.Step title="Setup grid" onClick={() => this.navigateTo('/setup-grid')} />
-                <Steps.Step title="Add words" onClick={() => this.navigateTo('/add-words')} />
-                <Steps.Step title="Preview" onClick={() => this.navigateTo('/preview')} />
-                <Steps.Step title="Print" onClick={() => this.navigateTo('/print')} />
+                <Steps.Step title={lang.MENU_SETUP_GRID} onClick={() => this.navigateTo('/setup-grid')} />
+                <Steps.Step title={lang.MENU_ADD_WORDS} onClick={() => this.navigateTo('/add-words')} />
+                <Steps.Step title={lang.MENU_PREVIEW} onClick={() => this.navigateTo('/preview')} />
+                <Steps.Step title={lang.MENU_PRINT} onClick={() => this.navigateTo('/print')} />
             </Steps>
         );
     }
 
     getNavButtons = () => {
+        const {lang} = this.props;
+
         return (
             <div>
         <Button.Group size="large">
           <Button type="normal" disabled>
-            <Icon type="left" />Back
+            <Icon type="left" />
+            {lang.NAV_BACK}
           </Button>
           <Button type="primary">
-            Next<Icon type="right" />
+            {lang.NAV_NEXT}
+            <Icon type="right" />
           </Button>
         </Button.Group>
             </div>
@@ -54,5 +60,9 @@ class Navigation extends React.Component {
     }
 
 }
+
+Navigation.propTypes = {
+    lang: PropTypes.object.isRequired
+};
 
 export default withRouter(Navigation);
