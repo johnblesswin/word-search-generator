@@ -32,7 +32,8 @@ class App extends React.Component {
       <Layout
         menu={<Navigation />}
         navButtons={<Navigation navButtons />}
-        pageContent={this.getPageContent}
+        pageContent={this.getPageContent()}
+        pagePath={this.props.location.pathname}
       />
     );
   }
