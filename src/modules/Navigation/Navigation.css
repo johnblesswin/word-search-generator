@@ -1,0 +1,16 @@
+.navigation-stepper .ant-steps-item {
+    cursor: pointer;
+}
+
+.ant-steps-item-finish:hover .ant-steps-item-icon,
+.ant-steps-item-wait:hover .ant-steps-item-icon
+{
+    /*background-color: #D7E8FE;*/
+    filter: brightness(95%);
+}
+
+/*.ant-steps-item-finish:hover .ant-steps-item-content,
+.ant-steps-item-wait:hover .ant-steps-item-content
+{
+    filter: brightness(10%);
+}*/
