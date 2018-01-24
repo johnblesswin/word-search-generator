@@ -16,25 +16,25 @@ class App extends React.Component {
 
   getPageContent = () => {
     return (
-      <Switch>
-        <Route exact path='/' component={StartPage} />
-        <Route path='/setup-grid' component={SetupGrid} />
-        <Route path='/add-words' component={WordList} />
-        <Route path='/preview' component={Preview} />
-        <Route path='/print' component={Print} />
-        <Route path="*" render={() => (<Redirect to="/" />)} />
-      </Switch>
+        <Switch>
+            <Route exact path='/' component={StartPage} />
+            <Route path='/setup-grid' component={SetupGrid} />
+            <Route path='/add-words' component={WordList} />
+            <Route path='/preview' component={Preview} />
+            <Route path='/print' component={Print} />
+            <Route path="*" render={() => (<Redirect to="/" />)} />
+        </Switch>
     );
   }
 
   render() {
     return (
-      <Layout
-        menu={<Navigation />}
-        navButtons={<Navigation navButtons />}
-        pageContent={this.getPageContent()}
-        pagePath={this.props.location.pathname}
-      />
+        <Layout
+            menu={<Navigation lang={this.props.lang} />}
+            navButtons={<Navigation navButtons lang={this.props.lang} />}
+            pageContent={this.getPageContent()}
+            pagePath={this.props.location.pathname}
+        />
     );
   }
 
@@ -42,7 +42,7 @@ class App extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    messages: state.settings.language.messages
+    lang: state.settings.language.messages
   };
 }
 
