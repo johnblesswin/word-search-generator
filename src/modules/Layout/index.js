@@ -35,6 +35,6 @@ Layout.propTypes = {
     navButtons: PropTypes.element.isRequired,
     pageContent: PropTypes.element.isRequired,
     pagePath: PropTypes.string.isRequired
-  };
+};
 
 export default Layout;

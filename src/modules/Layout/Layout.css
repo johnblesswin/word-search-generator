@@ -1,7 +1,7 @@
 .layout {
-  width: 100%;
-  max-width: 700px;
-   margin: auto;
+    width: 100%;
+    max-width: 700px;
+    margin: auto;
 }
 
 .layout__menu {
@@ -9,7 +9,7 @@
 }
 
 .layout__page-content {
-  margin: 40px 0;
+    margin: 40px 0;
 }
 
 .layout__nav-buttons {
@@ -21,10 +21,10 @@
   }
   
 .page-enter.page-enter-active {
-  opacity: 1;
-  transition: opacity 300ms ease-in;
+    opacity: 1;
+    transition: opacity 300ms ease-in;
 }
 
 .page-leave {
-  display: none;
+    display: none;
 }
