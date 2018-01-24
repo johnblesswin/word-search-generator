@@ -12,7 +12,10 @@ class Letter extends React.Component {
 
   render() {
     return (
-      <div className="word-search-board__letter" style={this.getStyle()}>
+      <div
+        className="WS-board__letter"
+        style={this.getStyle()}
+      >
         {this.props.character}
       </div>
     );

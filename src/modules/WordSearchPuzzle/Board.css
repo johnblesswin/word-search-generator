@@ -1,6 +1,6 @@
 /*----------------------------------------------------*/
 
-.word-search-board {
+.WS-board {
     background-color: gray;
     position: relative;
     display: flex;
@@ -8,7 +8,7 @@
     align-items: flex-start;
 }
 
-.word-search-board__letter {
+.WS-board__letter {
     box-sizing: content-box;
     margin-bottom: -1px;
     margin-right: -1px;
@@ -41,7 +41,7 @@
     border-radius: 10000px;
     box-sizing: border-box;
     border: 0.5px solid dimgray;
-    background-color: rgba(25, 56, 212, 0.3);
+    background-color: rgba(57, 142, 254, 0.3);
 }
 
 /*----------------------------------------------------*/

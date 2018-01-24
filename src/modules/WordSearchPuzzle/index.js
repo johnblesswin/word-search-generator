@@ -8,7 +8,7 @@ class WordSearchPuzzle extends React.Component {
 
   render() {
     return (
-      <div style={{margin: '15%'}}>
+      <div>
         <Board 
           letters={sampleData.cells}
           words={sampleData.words}
