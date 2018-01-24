@@ -2,6 +2,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions';
 import { connect } from 'react-redux';
+import WordSearchPuzzle from './WordSearchPuzzle';
 
 class Preview extends React.Component {
 
@@ -12,7 +13,7 @@ class Preview extends React.Component {
 
   render() {
     return (
-      <p>Preview</p>
+      <WordSearchPuzzle />
     );
   }
 
