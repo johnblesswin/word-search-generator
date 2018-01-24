@@ -3,6 +3,14 @@ export const name = 'English';
 export const charset = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'x', 'q', 'v', 'w', 'y', 'z'];
 
 export const messages = {
+
+  MENU_SETUP_GRID: "Setup grid",
+  MENU_ADD_WORDS: "Add words",
+  MENU_PREVIEW: "Preview",
+  MENU_PRINT: "Print",
+  NAV_BACK: "Back",
+  NAV_NEXT: "Next",
+
   SUBMITTED_WORD_TOO_SHORT: "The word is too short.",
   SUBMITTED_WORD_TOO_LONG: "The word is too long and won’t fit the board.",
   SUBMITTED_WORD_HAS_INVALID_CHAR: "Invalid character: ",
