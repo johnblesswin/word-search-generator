@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import Letter from './Letter';
 import WordHighlight from './WordHighlight';
 import './Board.css';
@@ -99,5 +100,16 @@ class Board extends React.Component {
     }
 
 }
+
+Board.propTypes = {
+    letters: PropTypes.arrayOf(PropTypes.string).isRequired,
+    words: PropTypes.arrayOf(PropTypes.shape({
+        word: PropTypes.string.isRequired,
+        path: PropTypes.array.isRequired,
+        direction: PropTypes.string.isRequired
+    })).isRequired,
+    cols: PropTypes.number.isRequired,
+    highlightWords: PropTypes.bool.isRequired
+};
 
 export default Board;

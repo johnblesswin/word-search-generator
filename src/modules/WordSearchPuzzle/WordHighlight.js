@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const styles = {
 
@@ -131,5 +132,16 @@ class WordHighlight extends React.Component {
   }
 
 }
+
+WordHighlight.propTypes = {
+  word: PropTypes.shape({
+    path: PropTypes.array.isRequired,
+    direction: PropTypes.string.isRequired
+  }).isRequired,
+  cellSize: PropTypes.shape({
+    percent: PropTypes.number.isRequired,
+    decimal: PropTypes.number.isRequired
+  }).isRequired
+};
 
 export default WordHighlight;
