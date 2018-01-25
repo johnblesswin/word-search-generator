@@ -90,11 +90,14 @@ class Board extends React.Component {
         return (
             <div
                 ref={(div) => { this.container = div;}}
-                className="WS-board"
+                className="WS-board-preview"
                 style={this.getStyle()}
             >
                 {this.getLetters()}
-                {this.getWordHighlights()}
+                <div className="WS-board-preview__outline"></div>
+                <div className="WS-board-preview__highlight_wrapper">
+                    {this.getWordHighlights()}
+                </div>
             </div>
         );
     }

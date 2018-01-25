@@ -14,7 +14,7 @@ class Letter extends React.PureComponent {
     render() {
         return (
             <div
-                className="WS-board__letter"
+                className="WS-board-preview__letter"
                 style={this.getStyle()}
             >
             {this.props.character}

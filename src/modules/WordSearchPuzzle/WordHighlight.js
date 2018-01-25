@@ -43,7 +43,7 @@ const styles = {
         transform: `rotate(-45deg) translateX(calc(((${cellSize.percent}% * 1.4142) - ${cellSize.percent}%) / 2)) translateY(-0px)`,
         transformOrigin: `left bottom`,
         bottom: `${100 - (word.y * cellSize.percent + cellSize.percent)}%`,
-        left: `${word.x * cellSize.percent}%`
+        left: `calc(${word.x * cellSize.percent}% + 1px)`
       },
       highlight: {
         width: `calc(100% * 1.4142 * ${word.length * cellSize.decimal} - ((${cellSize.percent}% * 1.4142) - ${cellSize.percent}%) - 1px)`,
@@ -64,8 +64,8 @@ const styles = {
       wrapper: {
         transform: `rotate(45deg) translateX(calc(((${cellSize.percent}% * 1.4142) - ${cellSize.percent}%) / 2)) translateY(-0px)`,
         transformOrigin: `left top`,
-        top: `${word.y * cellSize.percent}%`,
-        left: `${word.x * cellSize.percent}%`
+        top: `calc(${word.y * cellSize.percent}% + 1px)`,
+        left: `calc(${word.x * cellSize.percent}% + 1px)`
       },
       highlight: {
         width: `calc(100% * 1.4142 * ${word.length * cellSize.decimal} - ((${cellSize.percent}% * 1.4142) - ${cellSize.percent}%) - 1px)`,

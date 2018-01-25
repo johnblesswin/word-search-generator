@@ -1,19 +1,26 @@
 /*----------------------------------------------------*/
 
-.WS-board {
-    background-color: gray;
+.WS-board-preview {
     position: relative;
     display: flex;
     flex-flow: row wrap;
     align-items: flex-start;
 }
 
-.WS-board__letter {
+.WS-board-preview__outline {
+  width: calc(100% + 1px);
+  height: calc(100% + 1px);
+  box-sizing: border-box;
+  border: 1px solid dimgray;
+  position: absolute;
+}
+
+
+.WS-board-preview__letter {
     box-sizing: content-box;
     margin-bottom: -1px;
     margin-right: -1px;
     border: 1px solid lightgray;
-    background-color: white;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,11 +29,19 @@
 
 /*----------------------------------------------------*/
 
+.WS-board-preview__highlight_wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    opacity: 1;
+    transition: opacity 1000ms ease-in-out;
+}
+
 .WS-board-preview__highlight_wrapper--crosswise-up,
 .WS-board-preview__highlight_wrapper--crosswise-down,
 .WS-board-preview__highlight_wrapper--horizontal,
 .WS-board-preview__highlight_wrapper--vertical {
-   /* background-color: rgba(25, 56, 212, 0.3);*/
     width: 100%;
     height: 100%;
     position: absolute;
@@ -40,8 +55,8 @@
     position: absolute;
     border-radius: 10000px;
     box-sizing: border-box;
-    border: 0.5px solid dimgray;
-    background-color: rgba(57, 142, 254, 0.3);
+    border: 1px solid dimgray;
+    background-color: rgba(25, 56, 212, 0.3);
 }
 
 /*----------------------------------------------------*/
