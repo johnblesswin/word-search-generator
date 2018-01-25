@@ -1,6 +1,10 @@
 const path = require('path');
 const webpack = require('webpack');
+const fs  = require('fs');
+const lessToJs = require('less-vars-to-js');
 
+const themeVariables = lessToJs(fs.readFileSync(path.join(__dirname, './src/ant-theme-vars.less'), 'utf8'));
+console.log(themeVariables);
 module.exports = {
   devtool: 'inline-source-map',
   entry: [
@@ -21,12 +25,31 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin()
   ],
   module: {
-    loaders: [
-      {test: /\.js$/, include: path.join(__dirname, 'src'), loaders: ['babel-loader']},
-      {test: /(\.css)$/, loader: "style-loader!css-loader"},
-      //{test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=image/svg+xml'},
-       {
-        test: /\.(gif|png|jpe?g|svg)$/i,
+
+    rules: [
+      {
+        test: /\.js$/,
+        loader: "babel-loader"
+      },
+      {
+        test: /\.css$/,
+        use: [ 'style-loader', 'css-loader' ]
+      },
+      {
+        test: /\.less$/,
+        use: [
+          {loader: "style-loader"},
+          {loader: "css-loader"},
+          {loader: "less-loader",
+            options: {
+              modifyVars: themeVariables // override default antd variables
+            }
+          }
+        ]
+      },
+
+      {
+        test: /\.(gif|png|jpe?g|svg)$/,
         use: [
           'file-loader',
           {
@@ -37,9 +60,6 @@ module.exports = {
           },
         ],
       },
-      {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader'},
-      {test: /\.(woff|woff2)$/, loader: 'url-loader?prefix=font/&limit=5000'},
-      {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=application/octet-stream'}
     ]
   }
 };
