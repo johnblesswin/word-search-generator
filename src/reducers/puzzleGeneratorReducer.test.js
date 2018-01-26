@@ -26,7 +26,7 @@ describe('puzzle generator reducer', () => {
         state.generated = 'some puzzle';
         action = {type: types.PUZZLE_GENERATION_PENDING};
         state = reducer(state, action);
-        expect(state.generated).toEqual(null);
+        expect(state.generated).toBe(null);
     });
 
     it('should correctly set flags on new puzzle request', () => {
@@ -34,22 +34,22 @@ describe('puzzle generator reducer', () => {
         state.error = true;
         action = {type: types.PUZZLE_GENERATION_PENDING};
         state = reducer(state, action);
-        expect(state.isPending).toEqual(true);
-        expect(state.error).toEqual(false);
+        expect(state.isPending).toBe(true);
+        expect(state.error).toBe(false);
     });
     
     it('should register the new puzzle when it is ready', () => {
         state.generated = null;
         const newPuzzle = 'new puzzle';
         action = {type: types.PUZZLE_GENERATION_COMPLETED, payload: {puzzle: newPuzzle}};
-        expect(state.generated).toEqual(newPuzzle);
+        expect(state.generated).toBe(newPuzzle);
     });
 
     it('should clear the isPending flag when a new puzzle is ready', () => {
         state.isPending = true;
         action = {type: types.PUZZLE_GENERATION_COMPLETED};
         state = reducer(state, action);
-        expect(state.isPending).toEqual(false);
+        expect(state.isPending).toBe(false);
     });
 
     it('should correctly set flags on puzzle generation error', () => {
@@ -57,8 +57,8 @@ describe('puzzle generator reducer', () => {
         state.isPending = true;
         action = {type: types.PUZZLE_GENERATION_ERROR};
         state = reducer(state, action);
-        expect(state.isPending).toEqual(false);
-        expect(state.error).toEqual(true);
+        expect(state.isPending).toBe(false);
+        expect(state.error).toBe(true);
     });
 
 });
