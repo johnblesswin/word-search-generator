@@ -1,6 +1,7 @@
 import wordsReducer from './wordsReducer';
 import { words as initialState } from '../store/initialState';
 import * as actions from '../actions';
+import * as types from '../actions/types';
 
 const helpers = {
 
@@ -24,7 +25,7 @@ describe('word list reducer', () => {
     };
   });
 
-  it('returns the initial state', () => {
+  it('should return the initial state', () => {
     expect(
       wordsReducer(undefined, {})
     ).toEqual(
@@ -32,7 +33,7 @@ describe('word list reducer', () => {
     );
   });
 
-  it('returns the state unchanged if the "locked" flag is set to true', () => {
+  it('should return the state unchanged if the "locked" flag is set to true', () => {
     state.locked = true;
     const previousState = {...state};
     // Try typing a word
@@ -43,7 +44,7 @@ describe('word list reducer', () => {
       .toEqual(previousState);
   });
 
-  it('correctly registers the word being typed', () => {
+  it('should correctly register the word being typed', () => {
     // Type a word
     action = actions.typeWord(' SampleWord    ');
     state = wordsReducer(state, action);
@@ -52,19 +53,19 @@ describe('word list reducer', () => {
       toBe('sampleword'); // regiseterd as lowercase, stripped of leading and trailing whitespaces
   });
 
-  it('does not add the submitted word if it is too long, and adds the relevant error flag', () => {
+  it('should not add the submitted word if it is too long, and should add the relevant error flag', () => {
     // Limit max word length
     state.maxWordLength = 5;
     state = helpers.addWord('supercalifragilisticexpialidocious', state);
     // Check the word list
-    expect(state.list.length)
-      .toBe(0); // no words
+    expect(state.list)
+      .toHaveLength(0); // no words
     // Check the error flag existence
-    expect(result.currentlyTyped.errors)
+    expect(state.currentlyTyped.errors)
       .toContain('SUBMITTED_WORD_TOO_LONG');
   });
 
-  it('does not add the submitted word if it has characters from outside the charset', () => {
+  it('should not add the submitted word if it has characters from outside the charset, and should add the relevant flag', () => {
     state.charset = ['a', 'b', 'c'];
     // Try adding a word with a letter from outside the charset
     state = helpers.addWord('abcd', state);
@@ -73,7 +74,15 @@ describe('word list reducer', () => {
       .toHaveLength(0); // no words
   });
 
-  it('does not add the submitted word if it already exists', () => {
+  it('should add the relevant error flag if the submitted word has characters from outside the charset', () => {
+    state.charset = ['a', 'b', 'c'];
+    // Try adding a word with a letter from outside the charset
+    state = helpers.addWord('abcd', state);
+    expect(state.currentlyTyped.errors)
+      .toContain('SUBMITTED_WORD_HAS_INVALID_CHARS');
+  });
+
+  it('should not add the submitted word if it already exists', () => {
     // Type a word and add it to the list
     state = helpers.addWord('word', state);
     // Try adding the same word again
@@ -83,7 +92,7 @@ describe('word list reducer', () => {
       .toHaveLength(1); // one word only
   });
 
-  it('adds the submitted word to the list if there are no errors, and sets the "touched" flag to true', () => {
+  it('should add the submitted word to the list if there are no errors, and set the "touched" flag to true', () => {
     state.touched = false;
     state = helpers.addWord('word', state);
     // Check the word list
@@ -94,7 +103,7 @@ describe('word list reducer', () => {
       .toBe(true);
   });
 
-  it('removes the selected word from the list', () => {
+  it('should remove the selected word from the list', () => {
     state = helpers.addWord('word', state);
     // Check the word list
     expect(state.list.length)
@@ -106,7 +115,7 @@ describe('word list reducer', () => {
       .toHaveLength(0); // no words
   });
 
-  it('marks the selected word as circled, and turns off the circled flag on all the other words', () => {
+  it('should mark the selected word as circled, and turn off the circled flag on all the other words', () => {
     state = helpers.addWord('word', state);
     state = helpers.addWord('anotherword', state);
     // Mark the first word as circled out
@@ -123,7 +132,7 @@ describe('word list reducer', () => {
       .toBe(false);
   });
 
-  it('correctly calculates maxWordLength', () => {
+  it('should correctly calculate maxWordLength', () => {
     // Set the grid size to 4: this will set maxWordSize to 25 (100/4 = 25)
     action = actions.setGridSize(20);
     state = wordsReducer(state, action);
@@ -131,7 +140,7 @@ describe('word list reducer', () => {
       .toBe(25);
   });
 
-  it('validates the existing words against new properties', () => {
+  it('should validate the existing words against new properties', () => {
     // Type a five-letter word and add it to the list
     state = helpers.addWord('abcde', state);
     // Type a six-letter word and add it to the list
@@ -147,7 +156,7 @@ describe('word list reducer', () => {
       .toBe(false);
   });
 
-  it('switches the active charset on language change', () => {
+  it('should switch the active charset on language change', () => {
     // Switch to PL
     action = actions.switchLanguage('PL');
     state = wordsReducer(state, action);
@@ -160,37 +169,37 @@ describe('word list reducer', () => {
       .toEqual(state.charsets.EN);
   });
 
-  it('locks while the puzzle is being generated', () => {
+  it('should lock while the puzzle is being generated', () => {
     state.locked = false;
-    state = wordsReducer(state, {type: 'PUZZLE_IS_BEING_GENERATED'});
+    state = wordsReducer(state, {type: 'PUZZLE_GENERATION_PENDING'});
     expect(state.locked)
       .toBe(true);
   });
 
-  it('unlocks once the puzzle has been generated', () => {
+  it('should unlock once the puzzle has been generated', () => {
     state.locked = true;
-    state = wordsReducer(state, {type: 'PUZZLE_GENERATED'});
+    state = wordsReducer(state, {type: types.PUZZLE_GENERATION_COMPLETED});
     expect(state.locked)
       .toBe(false);
   });
 
-  it('disables the "touched" flag once the puzzle has been generated', () => {
+  it('should disable the "touched" flag once the puzzle has been generated', () => {
     state.touched = true;
-    state = wordsReducer(state, {type: 'PUZZLE_GENERATED'});
+    state = wordsReducer(state, {type: types.PUZZLE_GENERATION_COMPLETED});
     expect(state.touched)
       .toBe(false);
   });
 
-  it('unlocks on puzzle generator error', () => {
+  it('should unlock on puzzle generator error', () => {
     state.locked = true;
-    state = wordsReducer(state, {type: 'ERROR_GENERATING_PUZZLE'});
+    state = wordsReducer(state, {type: types.PUZZLE_GENERATION_ERROR});
     expect(state.locked)
       .toBe(false);
   });
 
-  it('retains the "touched" flag on puzzle generator error', () => {
+  it('should retain the "touched" flag on puzzle generator error', () => {
     state.touched = true;
-    state = wordsReducer(state, {type: 'ERROR_GENERATING_PUZZLE'});
+    state = wordsReducer(state, {type: types.PUZZLE_GENERATION_ERROR});
     expect(state.touched)
       .toBe(true);
   });
