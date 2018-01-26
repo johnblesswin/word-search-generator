@@ -3,8 +3,80 @@ import * as types from '../actions/types';
 
 describe('typeWord action creator', () => {
 
-    it('creates the action properly');
+    it('should create a TYPE_WORD action', () => {
+        const action = actions.typeWord();
+        expect(action.type).toEqual(types.TYPE_WORD);
+    });
 
+    it('should include the word in the action payload', () => {
+        const word = "someword",
+        action = actions.typeWord(word);
+        expect(action.payload.word).toEqual(word);
+    });
+});
+
+describe('submitWord action creator', () => {
+
+    it('should create a SUBMIT_WORD action', () => {
+        const action = actions.submitWord();
+        expect(action.type).toEqual(types.SUBMIT_WORD);
+    });
+});
+
+describe('removeWord action creator', () => {
+
+    it('should create a REMOVE_WORD action', () => {
+        const action = actions.removeWord();
+        expect(action.type).toEqual(types.REMOVE_WORD);
+    });
+
+    it('should include the word in the action payload', () => {
+        const word = "someword",
+        action = actions.removeWord(word);
+        expect(action.payload.word).toEqual(word);
+    });
+});
+
+describe('circleWord action creator', () => {
+
+    it('should create a CIRCLE_WORD action', () => {
+        const action = actions.circleWord();
+        expect(action.type).toEqual(types.CIRCLE_WORD);
+    });
+
+    it('should include the word in the action payload', () => {
+        const word = "someword",
+        action = actions.circleWord(word);
+        expect(action.payload.word).toEqual(word);
+    });
+});
+
+describe('setGridSize action creator', () => {
+
+    it('should create a SET_GRID_SIZE action', () => {
+        const action = actions.setGridSize();
+        expect(action.type).toEqual(types.SET_GRID_SIZE);
+    });
+
+    it('should include the grid size in the action payload', () => {
+        const size = 42,
+        action = actions.setGridSize(size);
+        expect(action.payload.size).toEqual(size);
+    });
+});
+
+describe('switchLanguage action creator', () => {
+
+    it('should create a SET_GRID_SIZE action', () => {
+        const action = actions.switchLanguage();
+        expect(action.type).toEqual(types.SWITCH_LANGUAGE);
+    });
+
+    it('should include the language code in the action payload', () => {
+        const langCode = 'PL',
+        action = actions.switchLanguage(langCode);
+        expect(action.payload.langCode).toEqual(langCode);
+    });
 });
 
 // Prepare spy functions
@@ -47,12 +119,12 @@ describe('requestPuzzle action creator', () => {
         expect(dispatch).toHaveBeenCalledTimes(0);
     });
 
-    it.skip('should call the puzzle generator if words and/or grid is touched', ()=> {
+    it('should call the puzzle generator if words and/or grid is touched', ()=> {
         runCreator();
         expect(generatePuzzle).toHaveBeenCalledTimes(1);
     });
 
-    it.skip('should call the puzzle generator with the right arguments', () => {
+    it('should call the puzzle generator with the right arguments', () => {
         const gridSize = 42,
         charset = ['🐇', '🐓', '🐦', '🐧'],
         wordList = [
@@ -71,7 +143,7 @@ describe('requestPuzzle action creator', () => {
         expect(generatePuzzle).toHaveBeenCalledWith(gridSize, wordListFinal, charset);
     });
 
-    it.skip('should dispatch a PENDING action', () => {
+    it('should dispatch a PENDING action', () => {
         runCreator();
         return mockPromise.then(() => {
             const {type} = dispatch.mock.calls[0][0];
@@ -79,7 +151,7 @@ describe('requestPuzzle action creator', () => {
         });
     });
 
-    it.skip('should dispatch a COMPLETED action', () => {
+    it('should dispatch a COMPLETED action', () => {
         runCreator();
         return mockPromise.then(() => {
             const {type} = dispatch.mock.calls[1][0];
@@ -87,7 +159,7 @@ describe('requestPuzzle action creator', () => {
         });
     });
 
-    it.skip('should include the puzzle generator result in a COMPLETED action', () => {
+    it('should include the puzzle generator result in a COMPLETED action', () => {
         mockPromise = Promise.resolve('test value');
         runCreator();
         return mockPromise.then(() => {
