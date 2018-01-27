@@ -1,73 +1,98 @@
-import settingsReducer from './settingsReducer';
-import { settings as initialState } from '../store/initialState';
-import * as actions from '../actions';
+    import reducer from './settingsReducer';
+    import { settings as initialState } from '../store/initialState';
+    import * as actions from '../actions';
+    import * as types from '../actions/types';
 
-describe('settings reducer', () => {
+    describe('settings reducer', () => {
 
-  let state, action;
+    let state, action;
 
-  beforeEach(() => {
-    action = null;
-    state = {
-      ...initialState
-    };
-  });
+    beforeEach(() => {
+        action = null;
+        state = {
+        ...initialState
+        };
+    });
 
-  it('returns the initial state', () => {
-    expect(
-      settingsReducer(undefined, {})
-    ).toEqual(
-      initialState
-    );
-  });
+    it('should return the initial state', () => {
+        expect(
+        reducer(undefined, {})
+        ).toEqual(
+        initialState
+        );
+    });
 
-  it('correctly registers grid size changes'); // remember to test the touched flag
-  it('correctly toggles the word crossing option'); // see above
-  it('correctly switches the language'); // see above
+    it('should correctly register the new grid size', () => {
+        action = actions.setGridSize(42);
+        state = reducer(state, action);
+        expect(state.gridSize).toBe(42);
+    });
 
-  it('returns the state unchanged if the "locked" flag is set to true', () => {
-    state.locked = true;
-    const previousState = {...state};
-    // Try...
+    it('should enable the "touched" flag on grid size change', () => {
+        state.touched = false;
+        action = actions.setGridSize(42);
+        state = reducer(state, action);
+        expect(state.touched).toBe(true);
+    });
 
-    // Check if the state remains unchanged
-    expect(state)
-      .toEqual(previousState);
-  });
+    it('should correctly switch the language', () => {
+        state.language.current = 'EN';
+        action = actions.switchLanguage('PL');
+        state = reducer(state, action);
+        expect(state.language.current).toBe('PL');
+    });
 
-  it('locks while the puzzle is being generated', () => {
-    state.locked = false;
-    state = settingsReducer(state, {type: 'PUZZLE_IS_BEING_GENERATED'});
-    expect(state.locked)
-      .toBe(true);
-  });
+    it('should enable the "touched" flag on language change', () => {
+        state.touched = false;
+        action = actions.switchLanguage('PL');
+        state = reducer(state, action);
+        expect(state.touched).toBe(true);
+    });
 
-  it('unlocks once the puzzle has been generated', () => {
-    state.locked = true;
-    state = settingsReducer(state, {type: 'PUZZLE_GENERATED'});
-    expect(state.locked)
-      .toBe(false);
-  });
+    it('should return the state unchanged if the "locked" flag is set to true', () => {
+        state.locked = true;
+        const previousState = {...state};
+        // Try changing the grid size
+        action = actions.setGridSize(42);
+        state = reducer(state, action);
+        // Check if the state remains unchanged
+        expect(state)
+        .toEqual(previousState);
+    });
 
-  it('disables the "touched" flag once the puzzle has been generated', () => {
-    state.touched = true;
-    state = settingsReducer(state, {type: 'PUZZLE_GENERATED'});
-    expect(state.touched)
-      .toBe(false);
-  });
+    it('should lock while the puzzle is being generated', () => {
+        state.locked = false;
+        state = reducer(state, {type: types.PUZZLE_GENERATION_PENDING});
+        expect(state.locked)
+        .toBe(true);
+    });
 
-  it('unlocks on puzzle generator error', () => {
-    state.locked = true;
-    state = settingsReducer(state, {type: 'ERROR_GENERATING_PUZZLE'});
-    expect(state.locked)
-      .toBe(false);
-  });
+    it('should unlock once the puzzle has been generated', () => {
+        state.locked = true;
+        state = reducer(state, {type: types.PUZZLE_GENERATION_COMPLETED});
+        expect(state.locked)
+        .toBe(false);
+    });
 
-  it('retains the "touched" flag on puzzle generator error', () => {
-    state.touched = true;
-    state = settingsReducer(state, {type: 'ERROR_GENERATING_PUZZLE'});
-    expect(state.touched)
-      .toBe(true);
-  });
+    it('should disable the "touched" flag once the puzzle has been generated', () => {
+        state.touched = true;
+        state = reducer(state, {type: types.PUZZLE_GENERATION_COMPLETED});
+        expect(state.touched)
+        .toBe(false);
+    });
 
-});
+    it('should unlock on puzzle generator error', () => {
+        state.locked = true;
+        state = reducer(state, {type: types.PUZZLE_GENERATION_ERROR});
+        expect(state.locked)
+        .toBe(false);
+    });
+
+    it('should retain the "touched" flag on puzzle generator error', () => {
+        state.touched = true;
+        state = reducer(state, {type: types.PUZZLE_GENERATION_ERROR});
+        expect(state.touched)
+        .toBe(true);
+    });
+
+    });
