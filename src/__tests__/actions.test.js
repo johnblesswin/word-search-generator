@@ -11,7 +11,7 @@ describe('typeWord action creator', () => {
     it('should include the word in the action payload', () => {
         const word = "someword",
         action = actions.typeWord(word);
-        expect(action.payload.word).toEqual(word);
+        expect(action.payload.word).toBe(word);
     });
 });
 
@@ -19,7 +19,7 @@ describe('submitWord action creator', () => {
 
     it('should create a SUBMIT_WORD action', () => {
         const action = actions.submitWord();
-        expect(action.type).toEqual(types.SUBMIT_WORD);
+        expect(action.type).toBe(types.SUBMIT_WORD);
     });
 });
 
@@ -27,13 +27,13 @@ describe('removeWord action creator', () => {
 
     it('should create a REMOVE_WORD action', () => {
         const action = actions.removeWord();
-        expect(action.type).toEqual(types.REMOVE_WORD);
+        expect(action.type).toBe(types.REMOVE_WORD);
     });
 
     it('should include the word in the action payload', () => {
         const word = "someword",
         action = actions.removeWord(word);
-        expect(action.payload.word).toEqual(word);
+        expect(action.payload.word).toBe(word);
     });
 });
 
@@ -41,13 +41,13 @@ describe('circleWord action creator', () => {
 
     it('should create a CIRCLE_WORD action', () => {
         const action = actions.circleWord();
-        expect(action.type).toEqual(types.CIRCLE_WORD);
+        expect(action.type).toBe(types.CIRCLE_WORD);
     });
 
     it('should include the word in the action payload', () => {
         const word = "someword",
         action = actions.circleWord(word);
-        expect(action.payload.word).toEqual(word);
+        expect(action.payload.word).toBe(word);
     });
 });
 
@@ -55,27 +55,27 @@ describe('setGridSize action creator', () => {
 
     it('should create a SET_GRID_SIZE action', () => {
         const action = actions.setGridSize();
-        expect(action.type).toEqual(types.SET_GRID_SIZE);
+        expect(action.type).toBe(types.SET_GRID_SIZE);
     });
 
     it('should include the grid size in the action payload', () => {
         const size = 42,
         action = actions.setGridSize(size);
-        expect(action.payload.size).toEqual(size);
+        expect(action.payload.size).toBe(size);
     });
 });
 
 describe('switchLanguage action creator', () => {
 
-    it('should create a SET_GRID_SIZE action', () => {
+    it('should create a SWITCH_LANGUAGE action', () => {
         const action = actions.switchLanguage();
-        expect(action.type).toEqual(types.SWITCH_LANGUAGE);
+        expect(action.type).toBe(types.SWITCH_LANGUAGE);
     });
 
     it('should include the language code in the action payload', () => {
         const langCode = 'PL',
         action = actions.switchLanguage(langCode);
-        expect(action.payload.langCode).toEqual(langCode);
+        expect(action.payload.langCode).toBe(langCode);
     });
 });
 
@@ -147,7 +147,7 @@ describe('requestPuzzle action creator', () => {
         runCreator();
         return mockPromise.then(() => {
             const {type} = dispatch.mock.calls[0][0];
-            expect(type).toEqual('PUZZLE_GENERATION_PENDING');
+            expect(type).toBe(types.PUZZLE_GENERATION_PENDING);
         });
     });
 
@@ -155,7 +155,7 @@ describe('requestPuzzle action creator', () => {
         runCreator();
         return mockPromise.then(() => {
             const {type} = dispatch.mock.calls[1][0];
-            expect(type).toEqual('PUZZLE_GENERATION_COMPLETED');
+            expect(type).toBe(types.PUZZLE_GENERATION_COMPLETED);
         });
     });
 
@@ -164,7 +164,7 @@ describe('requestPuzzle action creator', () => {
         runCreator();
         return mockPromise.then(() => {
             const {payload} = dispatch.mock.calls[1][0];
-            expect(payload.puzzle).toEqual('test value');
+            expect(payload.puzzle).toBe('test value');
         });
     });
 
