@@ -4,7 +4,7 @@ export const charset = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', '
 
 export const messages = {
 
-  MENU_SETUP_GRID: "Setup grid",
+  MENU_SETUP_GRID: "Set grid size",
   MENU_ADD_WORDS: "Add words",
   MENU_PREVIEW: "Preview",
   MENU_PRINT: "Print",
