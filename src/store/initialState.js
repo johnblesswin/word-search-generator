@@ -28,13 +28,12 @@ export const words = {
 };
 
 export const settings = {
-  grid: {
-    cell: {
-      min: appConfig.gridCell.min,
-      max: appConfig.gridCell.max,
-      size: appConfig.gridCell.default,
-    },
-    touched: true
+  touched: true,
+  locked: false,
+  gridSize: {
+    min: appConfig.gridCell.min,
+    max: appConfig.gridCell.max,
+    current: appConfig.gridCell.default
   },
   language: {
     current: appConfig.defaultLanguage,
@@ -44,9 +43,7 @@ export const settings = {
 };
 
 export const puzzle = {
-  isReady: false,
   isPending: false,
-  error: null,
-  board: {},
-  words: {}
+  error: false,
+  generated: null
 };
