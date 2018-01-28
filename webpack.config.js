@@ -32,6 +32,10 @@ module.exports = {
         loader: "babel-loader"
       },
       {
+        test: /\.worker\.js$/,
+        use: {loader: 'worker-loader'}
+      },
+      {
         test: /\.css$/,
         use: [ 'style-loader', 'css-loader' ]
       },
@@ -47,7 +51,6 @@ module.exports = {
           }
         ]
       },
-
       {
         test: /\.(gif|png|jpe?g|svg)$/,
         use: [
