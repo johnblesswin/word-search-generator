@@ -1,7 +1,7 @@
-import wordsReducer from './wordsReducer';
-import { words as initialState } from '../store/initialState';
-import * as actions from '../actions';
-import * as types from '../actions/types';
+import wordsReducer from '../reducers/wordsReducer';
+import { words as initialState } from '../../store/initialState';
+import * as actions from '../../actions';
+import * as types from '../../actions/types';
 
 const helpers = {
 

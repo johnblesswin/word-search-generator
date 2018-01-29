@@ -1,7 +1,7 @@
-    import reducer from './settingsReducer';
-    import { settings as initialState } from '../store/initialState';
-    import * as actions from '../actions';
-    import * as types from '../actions/types';
+    import reducer from '../reducers./settingsReducer';
+    import { settings as initialState } from '../../store/initialState';
+    import * as actions from '../../actions';
+    import * as types from '../../actions/types';
 
     describe('settings reducer', () => {
 
