@@ -1,4 +1,4 @@
-    import reducer from '../reducers./settingsReducer';
+    import reducer from '../../reducers/settingsReducer';
     import { settings as initialState } from '../../store/initialState';
     import * as actions from '../../actions';
     import * as types from '../../actions/types';
@@ -25,7 +25,7 @@
     it('should correctly register the new grid size', () => {
         action = actions.setGridSize(42);
         state = reducer(state, action);
-        expect(state.gridSize).toBe(42);
+        expect(state.gridSize.current).toBe(42);
     });
 
     it('should enable the "touched" flag on grid size change', () => {

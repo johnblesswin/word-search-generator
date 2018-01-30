@@ -1,4 +1,4 @@
-import { default as reducer } from '../reducers//puzzleGeneratorReducer';
+import { default as reducer } from '../reducers/puzzleGeneratorReducer';
 import { puzzle as initialState } from '../../store/initialState';
 import * as actions from '../../actions';
 import * as types from '../../actions/types';
