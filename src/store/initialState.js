@@ -7,18 +7,21 @@ export const words = {
   list: [],
   currentlyTyped: {
     word: '',
-    isTooLong: false,
-    isTooShort: true,
-    hasInvalidChars: false,
     isValid: true,
-    errors: []
+    warnings: {
+      invalidChars: false,
+      maxLengthExceeded: false
+    }
   },
   letterCount: 0,
   touched: true,
   locked: false,
   maxWordLength: appConfig.gridSize.default,
   charset: languages[defaultLang].charset,
-  errors: [],
+  warnings: {
+    invalidChars: false,
+    maxLengthExceeded: false
+  },
   // Extracts only charsets from the language data
   charsets: Object.keys(languages).reduce(
     (charsets, langCode) => {
