@@ -40,16 +40,12 @@ class App extends React.Component {
 
 }
 
-function mapStateToProps(state, ownProps) {
-  return {
+const mapStateToProps = (state, ownProps) => ({
     lang: state.settings.language.messages
-  };
-}
+});
 
-function mapDispatchToProps(dispatch) {
-  return {
+const mapDispatchToProps = (dispatch) => ({
     actions: bindActionCreators(actions, dispatch)
-  };
-}
+});
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
