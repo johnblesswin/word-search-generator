@@ -5,20 +5,22 @@ export default function puzzleGeneratorReducer(state = initialState, action) {
     case 'PUZZLE_IS_BEING_GENERATED':
       return puzzleIsBeingGenerated(state);
     case 'PUZZLE_GENERATED':
-      return puzzleGenerated(action.puzzle);
+      return puzzleGenerated(state, action.payload.puzzle);
     case 'ERROR_GENERATING_PUZZLE':
-      return errorGeneratingPuzzle(action.error);
+      return errorGeneratingPuzzle(state, action.error);
     default:
       return state;
   }
 }
 
 function puzzleIsBeingGenerated(state) {
-
+  return state;
 }
 
-function puzzleGenerated(puzzle) {}
+function puzzleGenerated(state, puzzle) {
+  return state;
+}
 
-function errorGeneratingPuzzle(error) {
-
+function errorGeneratingPuzzle(state, error) {
+  return state;
 }
