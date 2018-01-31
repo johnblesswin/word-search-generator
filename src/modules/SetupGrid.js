@@ -1,13 +1,60 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actions from '../actions';
+import { Spin, Slider } from 'antd';
 
 class SetupGrid extends React.Component {
 
-  render() {
-    return (
-      <p>Setup grid</p>
-    );
-  }
+    state = {
+        tempGridSize: this.props.gridSize.current
+    }
 
+    onChange = (value) => {
+        this.setState({
+            ...this.state,
+            tempGridSize: value
+        });
+    }
+
+    onAfterChange = (value) => {
+        this.props.actions.setGridSize(value);
+    }
+
+    render() {
+        const {min, max, current} = this.props.gridSize;
+        return (
+            <React.Fragment>
+                <Slider
+                    min={min}
+                    max={max}
+                    defaultValue={current}
+                    onChange={this.onChange}
+                    onAfterChange={this.onAfterChange}
+                />
+            </React.Fragment>
+        );
+    }
 }
 
-export default SetupGrid;
+SetupGrid.propTypes = {
+    actions: PropTypes.objectOf(PropTypes.func).isRequired,
+    lang: PropTypes.objectOf(PropTypes.string).isRequired,
+    gridSize: PropTypes.shape({
+        min: PropTypes.number,
+        max: PropTypes.number,
+        current: PropTypes.number
+    }).isRequired
+};
+
+const mapStateToProps = (state, ownProps) => ({
+    lang: state.settings.language.messages,
+    gridSize: state.settings.gridSize
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    actions: bindActionCreators(actions, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SetupGrid);
