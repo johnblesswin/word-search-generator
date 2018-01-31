@@ -2,10 +2,10 @@ export default {
 
   defaultLanguage: 'EN',
 
-  gridCell: { // in per cent
-    min: 1,
-    max: 10,
-    default: 5
+  gridSize: {
+    min: 5,
+    max: 100,
+    default: 12
   },
 
 
