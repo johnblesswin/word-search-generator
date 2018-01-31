@@ -53,7 +53,7 @@ describe('word list reducer', () => {
       toBe('sampleword'); // regiseterd as lowercase, stripped of leading and trailing whitespaces
   });
 
-  it('should not add the submitted word if it is too long, and should add the relevant error flag', () => {
+  it('should not add the submitted word if it is too long, and should trigger the relevant warning', () => {
     // Limit max word length
     state.maxWordLength = 5;
     state = helpers.addWord('supercalifragilisticexpialidocious', state);
@@ -61,11 +61,11 @@ describe('word list reducer', () => {
     expect(state.list)
       .toHaveLength(0); // no words
     // Check the error flag existence
-    expect(state.currentlyTyped.errors)
-      .toContain('SUBMITTED_WORD_TOO_LONG');
+    expect(state.currentlyTyped.warnings.maxLengthExceeded)
+      .toBe(true);
   });
 
-  it('should not add the submitted word if it has characters from outside the charset, and should add the relevant flag', () => {
+  it('should not add the submitted word if it has characters from outside the charset', () => {
     state.charset = ['a', 'b', 'c'];
     // Try adding a word with a letter from outside the charset
     state = helpers.addWord('abcd', state);
@@ -74,25 +74,25 @@ describe('word list reducer', () => {
       .toHaveLength(0); // no words
   });
 
-  it('should add the relevant error flag if the submitted word has characters from outside the charset', () => {
+  it('should enable the relevant warning flag if the submitted word has characters from outside the charset', () => {
     state.charset = ['a', 'b', 'c'];
     // Try adding a word with a letter from outside the charset
     state = helpers.addWord('abcd', state);
-    expect(state.currentlyTyped.errors)
-      .toContain('SUBMITTED_WORD_HAS_INVALID_CHARS');
+    expect(state.currentlyTyped.warnings.invalidChars)
+      .toBe(true);
   });
 
   it('should not add the submitted word if it already exists', () => {
     // Type a word and add it to the list
     state = helpers.addWord('word', state);
     // Try adding the same word again
-    state = helpers.addWord('wordtwo', state);
+    state = helpers.addWord('word', state);
     // Check the word list
     expect(state.list)
       .toHaveLength(1); // one word only
   });
 
-  it('should add the submitted word to the list if there are no errors, and set the "touched" flag to true', () => {
+  it('should add the submitted word to the list, and set the "touched" flag to true', () => {
     state.touched = false;
     state = helpers.addWord('word', state);
     // Check the word list
