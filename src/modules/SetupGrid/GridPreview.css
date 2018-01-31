@@ -1,0 +1,12 @@
+.grid-preview__grid {
+    border-collapse: collapse;
+    width: 100%;
+    width: 700px;
+    height: 700px;
+}
+
+.grid-preview__grid td {
+    border: 1px solid lightgray;
+    position: relative;
+    box-sizing: border-box;
+}

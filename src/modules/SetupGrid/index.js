@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../../actions';
 import { Spin, Slider } from 'antd';
+import GridPreview from './GridPreview';
+import './GridPreview.css';
 
 class SetupGrid extends React.Component {
 
@@ -32,7 +34,10 @@ class SetupGrid extends React.Component {
                     defaultValue={current}
                     onChange={this.onChange}
                     onAfterChange={this.onAfterChange}
+                    tipFormatter={(size) => `${size} × ${size}`}
+                    step={5}
                 />
+                <GridPreview gridSize={this.state.tempGridSize} />
             </React.Fragment>
         );
     }
