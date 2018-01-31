@@ -16,7 +16,7 @@ export const words = {
   letterCount: 0,
   touched: true,
   locked: false,
-  maxWordLength: 100 / appConfig.gridCell.default,
+  maxWordLength: appConfig.gridSize.default,
   charset: languages[defaultLang].charset,
   errors: [],
   // Extracts only charsets from the language data
@@ -31,9 +31,9 @@ export const settings = {
   touched: true,
   locked: false,
   gridSize: {
-    min: appConfig.gridCell.min,
-    max: appConfig.gridCell.max,
-    current: appConfig.gridCell.default
+    min: appConfig.gridSize.min,
+    max: appConfig.gridSize.max,
+    current: appConfig.gridSize.default
   },
   language: {
     current: appConfig.defaultLanguage,
