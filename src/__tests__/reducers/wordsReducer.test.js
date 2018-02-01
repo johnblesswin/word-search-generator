@@ -42,6 +42,19 @@ describe('word list reducer', () => {
       .toEqual(previousState);
   });
 
+  it.skip('should mark the selected word as circled, and turn off the circled flag on all the other words', () => {
+    state = helpers.addWord('word', state);
+    state = helpers.addWord('anotherword', state);
+    action = actions.circleWord('word');
+    state = wordsReducer(state, action);
+    action = actions.circleWord('anotherword');
+    state = wordsReducer(state, action);
+    expect(state.list[1].isCircledOut)
+      .toBe(true);
+    expect(state.list[0].isCircledOut)
+      .toBe(false);
+  });
+
   describe('on type', () => {
     it('should correctly register the word being typed', () => {
       action = actions.typeWord(' SampleWord    ');
@@ -140,25 +153,11 @@ describe('word list reducer', () => {
       state = wordsReducer(state, action);
       expect(state.touched)
         .toBe(true);
-    })
-  });
-
-
-
-  it.skip('should mark the selected word as circled, and turn off the circled flag on all the other words', () => {
-    state = helpers.addWord('word', state);
-    state = helpers.addWord('anotherword', state);
-    action = actions.circleWord('word');
-    state = wordsReducer(state, action);
-    action = actions.circleWord('anotherword');
-    state = wordsReducer(state, action);
-    expect(state.list[1].isCircledOut)
-      .toBe(true);
-    expect(state.list[0].isCircledOut)
-      .toBe(false);
+    });
   });
 
   describe('on grid size change', () => {
+
     it('should correctly set maxWordLength', () => {
       action = actions.setGridSize(25);
       state = wordsReducer(state, action);
@@ -175,6 +174,15 @@ describe('word list reducer', () => {
         .toBe(true);
       expect(state.list[1].isValid)
         .toBe(false);
+    });
+
+    it('should enable a top-level warning flag on re-validation error', () => {
+      state = helpers.addWord('abcde', state);
+      state = helpers.addWord('abcdef', state);
+      action = actions.setGridSize(5);
+      state = wordsReducer(state, action);
+      expect(state.warnings.maxLengthExceeded)
+        .toBe(true);
     });
   });
 
@@ -198,6 +206,16 @@ describe('word list reducer', () => {
       state = wordsReducer(state, action);
       expect(state.list[0].isValid)
         .toBe(false);
+    });
+
+    it('should enable a top-level warning flag on re-validation error', () => {
+      action = actions.switchLanguage('PL');
+      state = wordsReducer(state, action);
+      state = helpers.addWord('aąbćdeę', state);
+      action = actions.switchLanguage('EN');
+      state = wordsReducer(state, action);
+      expect(state.warnings.invalidChars)
+        .toBe(true);
     });
   });
 
