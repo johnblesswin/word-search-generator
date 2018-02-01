@@ -10,7 +10,8 @@ export const words = {
     isValid: true,
     warnings: {
       invalidChars: false,
-      maxLengthExceeded: false
+      maxLengthExceeded: false,
+      alreadyExists: false
     }
   },
   letterCount: 0,
