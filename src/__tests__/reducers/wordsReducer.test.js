@@ -36,22 +36,18 @@ describe('word list reducer', () => {
   it('should return the state unchanged if the "locked" flag is set to true', () => {
     state.locked = true;
     const previousState = {...state};
-    // Try typing a word
     action = actions.typeWord('word');
     state = wordsReducer(state, action);
-    // Check if the state remains unchanged
     expect(state)
       .toEqual(previousState);
   });
 
   describe('on type', () => {
     it('should correctly register the word being typed', () => {
-      // Type a word
       action = actions.typeWord(' SampleWord    ');
       state = wordsReducer(state, action);
-      // Check the registered word
       expect(state.currentlyTyped.word).
-        toBe('sampleword'); // regiseterd as lowercase, stripped of leading and trailing whitespaces
+        toBe('sampleword');
     });
 
     it('should lose the alreadyExists flag', () => {
@@ -68,16 +64,13 @@ describe('word list reducer', () => {
 
     it('should not add a word with characters from outside the charset', () => {
       state.charset = ['a', 'b', 'c'];
-      // Try adding a word with a letter from outside the charset
       state = helpers.addWord('abcd', state);
-      // Check the word list
       expect(state.list)
-        .toHaveLength(0); // no words
+        .toHaveLength(0);
     });
 
     it('should set the relevant warning flag if the word has characters from outside the charset', () => {
       state.charset = ['a', 'b', 'c'];
-      // Try adding a word with a letter from outside the charset
       state = helpers.addWord('abcd', state);
       expect(state.currentlyTyped.warnings.invalidChars)
         .not.toBe(false);
@@ -102,7 +95,7 @@ describe('word list reducer', () => {
     it('should not add a word shorther than 2 characters', () => {
       state = helpers.addWord('a', state);
       expect(state.list)
-        .toHaveLength(0); // no words
+        .toHaveLength(0);
     });
 
     describe('if the word already exists', () => {
@@ -129,15 +122,28 @@ describe('word list reducer', () => {
     });
   });
 
-  it('should remove the selected word from the list', () => {
-    state = helpers.addWord('word', state);
-    expect(state.list.length)
-      .toBe(1);
-    action = actions.removeWord('word');
-    state = wordsReducer(state, action);
-    expect(state.list)
-      .toHaveLength(0);
+  describe('on removal', () => {
+    it('should remove the word', () => {
+      state = helpers.addWord('word', state);
+      expect(state.list.length)
+        .toBe(1);
+      action = actions.removeWord('word');
+      state = wordsReducer(state, action);
+      expect(state.list)
+        .toHaveLength(0);
+    });
+
+    it('should enable the "touched" flag', () => {
+      state = helpers.addWord('word', state);
+      state.touched = false;
+      action = actions.removeWord('word');
+      state = wordsReducer(state, action);
+      expect(state.touched)
+        .toBe(true);
+    })
   });
+
+
 
   it.skip('should mark the selected word as circled, and turn off the circled flag on all the other words', () => {
     state = helpers.addWord('word', state);
@@ -160,7 +166,7 @@ describe('word list reducer', () => {
         .toBe(25);
     });
 
-    it('should validate the existing words', () => {
+    it('should re-validate the existing words', () => {
       state = helpers.addWord('abcde', state);
       state = helpers.addWord('abcdef', state);
       action = actions.setGridSize(5);
@@ -173,21 +179,25 @@ describe('word list reducer', () => {
   });
 
   describe('on language change', () => {
-    it.skip('should re-validate the existing words', () => {
-
-    });
-
     it('should switch the active charset', () => {
-      // Switch to PL
       action = actions.switchLanguage('PL');
       state = wordsReducer(state, action);
       expect(state.charset)
         .toEqual(state.charsets.PL);
-      // Switch to EN
       action = actions.switchLanguage('EN');
       state = wordsReducer(state, action);
       expect(state.charset)
         .toEqual(state.charsets.EN);
+    });
+
+    it('should re-validate the existing words', () => {
+      action = actions.switchLanguage('PL');
+      state = wordsReducer(state, action);
+      state = helpers.addWord('aąbćdeę', state);
+      action = actions.switchLanguage('EN');
+      state = wordsReducer(state, action);
+      expect(state.list[0].isValid)
+        .toBe(false);
     });
   });
 
