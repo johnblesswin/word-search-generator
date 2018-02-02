@@ -27,11 +27,20 @@ export function switchLanguage(langCode) {
 
 export function requestPuzzle() {
     return (dispatch, getState) => {
-        if (getState().settings.grid.touched || getState().words.touched) {
+        if ((getState().settings.touched || getState().words.touched) && !getState().puzzle.isPending) {
+
             dispatch({type: types.PUZZLE_GENERATION_PENDING});
-            generatePuzzle()
-                .then(puzzle => dispatch({type: types.PUZZLE_GENERATION_COMPLETED, payload: {puzzle}}))
-                .catch(error => dispatch({type: types.PUZZLE_GENERATION_ERROR, error}));
+
+            generatePuzzle(
+                getState().settings.gridSize.current,
+                getState().words.list.reduce((all, current) => {
+                    if (current.isValid) all.push(current.word);
+                    return all;
+                }, []),
+                getState().words.charset
+            )
+                .then(puzzle => dispatch({ type: types.PUZZLE_GENERATION_COMPLETED, payload: {puzzle} }))
+                .catch(error => dispatch({ type: types.PUZZLE_GENERATION_ERROR, error }));
         }
     };
 }
