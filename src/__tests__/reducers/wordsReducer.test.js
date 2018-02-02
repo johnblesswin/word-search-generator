@@ -20,6 +20,7 @@ describe('word list reducer', () => {
     action = null;
     state = {
       ...initialState,
+      list: [],
       charset: initialState.charsets.EN,
       maxWordLength: 10
     };
@@ -105,6 +106,8 @@ describe('word list reducer', () => {
         .toBe(true);
     });
 
+    it('should recalculate the total letter count');
+
     it('should not add a word shorther than 2 characters', () => {
       state = helpers.addWord('a', state);
       expect(state.list)
@@ -154,6 +157,10 @@ describe('word list reducer', () => {
       expect(state.touched)
         .toBe(true);
     });
+
+    it('should re-validate the list');
+
+    it('should recalculate the total letter count');
   });
 
   describe('on grid size change', () => {
@@ -184,6 +191,8 @@ describe('word list reducer', () => {
       expect(state.warnings.maxLengthExceeded)
         .toBe(true);
     });
+
+    it('should recalculate the total letter count');
   });
 
   describe('on language change', () => {
@@ -217,6 +226,8 @@ describe('word list reducer', () => {
       expect(state.warnings.invalidChars)
         .toBe(true);
     });
+
+    it('should recalculate the total letter count');
   });
 
   describe('while the puzzle is being generated', () => {
