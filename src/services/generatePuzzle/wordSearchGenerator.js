@@ -51,7 +51,7 @@ export default function generateWordSearch(gridWidth, words, charset) {
  */
 function randomFill(board, charset) {
     return board.map(cell => {
-        if (cell === false) return false; // Do not fill disabled cells.
+        if (cell === false) return false; // Prevent filling
 
         return cell
         ? cell
