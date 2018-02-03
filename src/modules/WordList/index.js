@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actions from '../actions';
-import { CSSTransitionGroup } from 'react-transition-group';
+import * as actions from '../../actions';
 import { Button, Input, Form } from 'antd';
-import WordListItem from './WordListItem';
+import Item from './WordListItem';
+import './WordList.css';
 
 class WordList extends React.Component {
 
@@ -13,7 +13,6 @@ class WordList extends React.Component {
         this.props.actions.submitWord();
     }
 
-    //typeWord = (event, {value}) => {
     typeWord = (e) => {
         this.props.actions.typeWord(e.target.value);
     }
@@ -22,22 +21,43 @@ class WordList extends React.Component {
         if (keyCode === 13) this.submitWord(); // Trigger submit on <Enter>
     }
 
-    circleOutWord = (word) => {
-        //this.props.actions.circleOutWord(word);
-    }
-
     removeWord = (word) => {
         this.props.actions.removeWord(word);
     }
 
-    render() {
+    getList() {
+        const list = [...this.props.list].reverse();
 
-        const items = this.props.list.map(item => {return <div key={item.word}>{item.word}</div>;});
+        if (!list.length) {
+            return this.getEmptyListInfo();
+        }
 
         return (
-            <React.Fragment>
+            <div className="word-list__list">
+                {list.map(item => (
+                    <Item
+                        word={item.word}
+                        key={item.word}
+                        remove={this.removeWord}
+                    >
+                        {item.word}
+                    </Item>
+                ))}
+            </div>
+        );
+    }
 
+    getEmptyListInfo() {
+        return (
+            <div className="word-list__empty-list-info">
+                [the list is empty]
+            </div>
+        );
+    }
 
+    render() {
+        return (
+            <div className="word-list">
                 <Form layout="inline">
                     <Form.Item
                         label=""
@@ -59,10 +79,8 @@ class WordList extends React.Component {
                         size="large"
                     />
                 </Form>
-
-                {items}
-
-            </React.Fragment>
+                {this.getList()}
+            </div>
         );
     }
 
