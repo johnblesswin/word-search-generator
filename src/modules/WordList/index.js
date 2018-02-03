@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../../actions';
 import { Button, Input, Form } from 'antd';
+import { CSSTransitionGroup } from 'react-transition-group';
 import Item from './WordListItem';
 import './WordList.css';
 
@@ -33,7 +34,13 @@ class WordList extends React.Component {
         }
 
         return (
-            <div className="word-list__list">
+            <CSSTransitionGroup
+                component="div"
+                className="word-list__list"
+                transitionName="word"
+                transitionEnterTimeout={500}
+                transitionLeaveTimeout={500}
+            >
                 {list.map(item => (
                     <Item
                         word={item.word}
@@ -43,7 +50,7 @@ class WordList extends React.Component {
                         {item.word}
                     </Item>
                 ))}
-            </div>
+            </CSSTransitionGroup>
         );
     }
 

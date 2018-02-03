@@ -32,3 +32,21 @@
 .word-list-item__delete-btn:hover .anticon {
     color: white;
 }
+
+.word-enter {
+    opacity: 0.01;
+  }
+  
+.word-enter.word-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+}
+
+.word-leave {
+    opacity: 1;
+}
+  
+.word-leave.word-leave-active {
+    opacity: 0.01;
+    transition: opacity 500ms ease-out;
+ }
