@@ -7,22 +7,23 @@ import './Board.css';
 
 class Board extends React.Component {
 
-    componentWillMount() {
-        /*
-        *  At this point it's impossible to calculate all the dimensions the component needs.
-        *  This will be completed after mounting.
-        */
-        this.calculateDimensions();
+    state = {
+        dimensions: {
+            board: {
+                cols: this.props.cols,
+                width: null,
+                height: null
+            },
+            cell: {
+                percent: 100 / this.props.cols,
+                decimal: 1 / this.props.cols
+            },
+            baseFontSize: null
+        }
     }
 
     componentDidMount() {
-        /* 
-        *  Using setTimeout() is just a workaround: otherwise in some circumstances it's impossible to get the actual
-        *  computed width of the container element (e.g. when the component is rendered right after entering/refreshing
-        *  the page).
-        */
-        setTimeout(this.calculateDimensions, 0);
-
+        this.calculateDimensions();
         window.addEventListener("resize", this.calculateDimensions);
     }
 
@@ -30,39 +31,40 @@ class Board extends React.Component {
         window.removeEventListener("resize", this.calculateDimensions);
     }
 
+    /**
+     * To work right, the container must be a square and have explicitly defined dimensions.
+     * By getting the actual width, it's possible to set its height to the same value later on.
+     */
     getActualContainerWidth = () => {
         if (!this.container) return;
-            let width = window.getComputedStyle(this.container).getPropertyValue('width');
-        if ( (width = parseInt(width, 10)) && !isNaN(width) ) {
-            return width;
-        }
+        return this.container.getBoundingClientRect().width;
     }
 
     calculateDimensions = () => {
         const {cols} = this.props,
-        actualWidth = this.getActualContainerWidth(),
-        dimensions = {
-        board: {
-            cols: cols,
-            width: actualWidth,
-            height: actualWidth
-        },
-        cell: {
-            percent: 100 / cols,
-            decimal: 1 / cols
-        },
-        baseFontSize: actualWidth * 0.75
-        };
-        this.setState({dimensions});
+        actualWidth = this.getActualContainerWidth();
+        this.setState(state => ({
+            ...state,
+            dimensions: {
+                ...state.dimensions,
+                board: {
+                    ...state.dimensions.board,
+                    width: actualWidth,
+                    height: actualWidth
+                },
+                baseFontSize: actualWidth * 0.75
+            }
+        }));
     }
 
-  getStyle = () => {
-    return {
-      height: this.state.dimensions.board.height + 'px',
-      fontSize: this.state.dimensions.baseFontSize + 'px',
-      visibility: (this.state.dimensions.board.width ? 'visible' :  'hidden') // Reveal only after the actual container dimensions have been calculated.
-    };
-  }
+    getStyle = () => {
+        return {
+            height: this.state.dimensions.board.height + 'px',
+            fontSize: this.state.dimensions.baseFontSize + 'px',
+            // Reveal only after the actual container size have been calculated (this prevents flickering):
+            visibility: (this.state.dimensions.board.width ? 'visible' :  'hidden')
+        };
+    }
 
     getLetters = () => {
         return this.props.letters.map((character, index) => 
