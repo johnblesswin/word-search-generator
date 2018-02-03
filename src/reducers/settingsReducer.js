@@ -1,16 +1,26 @@
 import { settings as initialState } from '../store/initialState';
 
 export default function settingsReducer(state = initialState, action) {
-    switch (action.type) {
-        case 'SET_GRID_SIZE': return setGridSize(state, action.payload.size);
-        case 'SWITCH_LANGUAGE': // as it says
-        case 'TOGGLE_WORD_CROSSING': // as it says
-        case 'PUZZLE_IS_BEING_GENERATED': // lock edit
-        case 'PUZZLE_GENERATED': // unlock edit, untouch grid settings
-        case 'ERROR_GENERATING_PUZZLE': // unlock edit
-
-        default:
+    if (state.locked === true
+        && action.type !== 'PUZZLE_GENERATION_COMPLETED'
+        && action.type !== 'PUZZLE_GENERATION_ERROR'
+    ) {
         return state;
+    }
+
+    switch (action.type) {
+        case 'SET_GRID_SIZE':
+            return setGridSize(state, action.payload.size);
+        case 'SWITCH_LANGUAGE':
+            return switchLanguage(state, action.payload.langCode);
+        case 'PUZZLE_GENERATION_PENDING':
+            return puzzleGenerationPending(state);
+        case 'PUZZLE_GENERATION_COMPLETED':
+            return puzzleGenerationCompleted(state);
+        case 'PUZZLE_GENERATION_ERROR':
+            return puzzleGenerationError(state);
+        default:
+            return state;
     }
 }
 
@@ -22,5 +32,39 @@ function setGridSize(state, size) {
             ...state.gridSize,
             current: size
         }
+    };
+}
+
+function switchLanguage(state, langCode) {
+    return {
+        ...state,
+        touched: true,
+        language: {
+            ...state.language,
+            current: langCode,
+            messages: state.language.allLanguages[langCode].messages
+        }
+    };
+}
+
+function puzzleGenerationPending(state) {
+    return {
+        ...state,
+        locked: true
+    };
+}
+
+function puzzleGenerationCompleted(state) {
+    return {
+        ...state,
+        locked: false,
+        touched: false
+    };
+}
+
+function puzzleGenerationError(state) {
+    return {
+        ...state,
+        locked: false
     };
 }
