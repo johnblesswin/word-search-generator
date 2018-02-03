@@ -12,8 +12,11 @@ class Preview extends React.Component {
   }
 
   render() {
+    if (!this.props.puzzle.generated) {
+      return <p>Generating puzzle...</p>;
+    }
     return (
-      <WordSearchPuzzle />
+      <WordSearchPuzzle puzzle={this.props.puzzle.generated}/>
     );
   }
 
