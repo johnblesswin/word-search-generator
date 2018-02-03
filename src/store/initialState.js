@@ -1,10 +1,11 @@
 import appConfig from '../AppConfig';
 import languages from '../languages';
+import sampleList from './sampleWordList';
 
 const defaultLang = appConfig.defaultLanguage;
 
 export const words = {
-  list: [],
+  list: sampleList,
   currentlyTyped: {
     word: '',
     isValid: true,
@@ -42,7 +43,7 @@ export const settings = {
   language: {
     current: appConfig.defaultLanguage,
     messages: languages[defaultLang].messages,
-    languages: languages
+    allLanguages: languages
   }
 };
 
