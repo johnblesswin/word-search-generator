@@ -1,9 +1,24 @@
 body {
-  margin: 0;
-  padding: 0;
+    padding: 30px 60px;
+    height: auto !important;
 }
 
 #root {
-  max-width: 60vw;
-  margin: 10vh 0 0 20vw;
+    max-width: 700px;
+    margin: 0 auto;
+    border: 1px solid #E5E5E5;
+    padding: 30px;
+}
+
+.app-name {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: rotate(-90deg) translate(-100%, -100%);
+    transform-origin: 0 0;
+    white-space: nowrap;
+    color: #E5E5E5;
+    line-height: normal;
+    font-size: 3.5em;
+    margin: -30px 0 0 -30px;
 }
