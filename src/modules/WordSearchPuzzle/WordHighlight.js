@@ -14,7 +14,7 @@ const styles = {
         height: `calc(100% * ${cellSize.decimal} + 1px)`
       },
       className: {
-        wrapper: 'WS-board-preview__highlight_wrapper--horizontal',
+        wrapper: 'WS-board-preview__highlights-wrapper--horizontal',
         highlight: 'WS-board-preview__highlight--horizontal'
       }
     };
@@ -31,7 +31,7 @@ const styles = {
         height: `${word.length * cellSize.percent}%`
       },
       className: {
-        wrapper: 'WS-board-preview__highlight_wrapper--vertical',
+        wrapper: 'WS-board-preview__highlights-wrapper--vertical',
         highlight: 'WS-board-preview__highlight--vertical'
       }
     };
@@ -53,7 +53,7 @@ const styles = {
         marginTop: `calc((-100% * ${cellSize.decimal} * 0.5))`
       },
       className: {
-        wrapper: 'WS-board-preview__highlight_wrapper--crosswise-up',
+        wrapper: 'WS-board-preview__highlights-wrapper--crosswise-up',
         highlight: 'WS-board-preview__highlight--crosswise-up'
       }
     };
@@ -75,7 +75,7 @@ const styles = {
         marginTop: `calc((-100% * ${cellSize.decimal} * 0.5))`
       },
       className: {
-        wrapper: 'WS-board-preview__highlight_wrapper--crosswise-down',
+        wrapper: 'WS-board-preview__highlights-wrapper--crosswise-down',
         highlight: 'WS-board-preview__highlight--crosswise-down'
       }
     };

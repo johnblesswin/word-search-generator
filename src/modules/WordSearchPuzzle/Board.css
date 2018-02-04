@@ -29,7 +29,7 @@
 
 /*----------------------------------------------------*/
 
-.WS-board-preview__highlight_wrapper {
+.WS-board-preview__highlights-wrapper {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -38,10 +38,10 @@
     transition: opacity 1000ms ease-in-out;
 }
 
-.WS-board-preview__highlight_wrapper--crosswise-up,
-.WS-board-preview__highlight_wrapper--crosswise-down,
-.WS-board-preview__highlight_wrapper--horizontal,
-.WS-board-preview__highlight_wrapper--vertical {
+.WS-board-preview__highlights-wrapper--crosswise-up,
+.WS-board-preview__highlights-wrapper--crosswise-down,
+.WS-board-preview__highlights-wrapper--horizontal,
+.WS-board-preview__highlights-wrapper--vertical {
     width: 100%;
     height: 100%;
     position: absolute;
