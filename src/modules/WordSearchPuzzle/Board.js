@@ -22,6 +22,10 @@ class Board extends React.Component {
         }
     }
 
+    /**
+     * To work right, the container must be a square and have explicitly defined dimensions. Now that it has mounted,
+     * it's possible to determine its actual width and set the height to the same value on next render.
+     */
     componentDidMount() {
         this.calculateDimensions();
         window.addEventListener("resize", this.calculateDimensions);
@@ -31,10 +35,6 @@ class Board extends React.Component {
         window.removeEventListener("resize", this.calculateDimensions);
     }
 
-    /**
-     * To work right, the container must be a square and have explicitly defined dimensions.
-     * By getting the actual width, it's possible to set its height to the same value later on.
-     */
     getActualContainerWidth = () => {
         if (!this.container) return;
         return this.container.getBoundingClientRect().width;
@@ -58,11 +58,12 @@ class Board extends React.Component {
     }
 
     getStyle = () => {
+        const {dimensions} = this.state;
         return {
-            height: this.state.dimensions.board.height + 'px',
-            fontSize: this.state.dimensions.baseFontSize + 'px',
+            height: dimensions.board.height + 'px',
+            fontSize: dimensions.baseFontSize + 'px',
             // Reveal only after the actual container size have been calculated (this prevents flickering):
-            visibility: (this.state.dimensions.board.width ? 'visible' :  'hidden')
+            visibility: (dimensions.board.width ? 'visible' :  'hidden')
         };
     }
 
@@ -97,7 +98,7 @@ class Board extends React.Component {
             >
                 {this.getLetters()}
                 <div className="WS-board-preview__outline"></div>
-                <div className="WS-board-preview__highlight_wrapper">
+                <div className="WS-board-preview__highlights-wrapper">
                     {this.getWordHighlights()}
                 </div>
             </div>
