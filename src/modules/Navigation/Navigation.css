@@ -1,3 +1,7 @@
+.ant-steps-item-title {
+    font-weight: bold !important;
+}
+
 .navigation-stepper .ant-steps-item {
     cursor: pointer;
 }
