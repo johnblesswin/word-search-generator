@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 
 import Layout from './modules/Layout';
 import Navigation from './modules/Navigation';
+import Notifications from './modules/Notifications';
 import StartPage from './modules/StartPage';
 import SetupGrid from './modules/SetupGrid';
 import WordList from './modules/WordList';
@@ -29,12 +30,14 @@ class App extends React.Component {
 
   render() {
     return (
-        <Layout
-            menu={<Navigation lang={this.props.lang} />}
-            navButtons={<Navigation navButtons lang={this.props.lang} />}
-            pageContent={this.getPageContent()}
-            pagePath={this.props.location.pathname}
-        />
+        <React.Fragment>
+            <Layout
+                menu={<Navigation lang={this.props.lang} />}
+                navButtons={<Navigation navButtons lang={this.props.lang} />}
+                pageContent={this.getPageContent()}
+                pagePath={this.props.location.pathname}
+            />
+        </React.Fragment>
     );
   }
 
