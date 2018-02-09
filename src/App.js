@@ -5,6 +5,7 @@ import * as actions from './actions';
 import { connect } from 'react-redux';
 
 import Layout from './modules/Layout';
+import LanguageSwitcher from './modules/LanguageSwitcher';
 import Navigation from './modules/Navigation';
 import Notifications from './modules/Notifications';
 import StartPage from './modules/StartPage';
@@ -36,6 +37,7 @@ class App extends React.Component {
                 lang={this.props.lang}
             />
             <Layout
+                languageSwitcher={<LanguageSwitcher {...this.props.languageOptions} />}
                 menu={<Navigation lang={this.props.lang} />}
                 navButtons={<Navigation navButtons lang={this.props.lang} />}
                 pageContent={this.getPageContent()}
@@ -49,6 +51,11 @@ class App extends React.Component {
 
 const mapStateToProps = (state, ownProps) => ({
     lang: state.settings.language.messages,
+    languageOptions: {
+        languages: state.settings.language.allLanguages,
+        currentLang: state.settings.language.current,
+        locked: state.settings.locked
+    },
     notifications: {
         invalidCharsFound: state.words.warnings.invalidChars,
         wordsMaxLengthExceeded: state.words.warnings.maxLengthExceeded,
