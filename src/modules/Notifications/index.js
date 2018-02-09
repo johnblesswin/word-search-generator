@@ -52,4 +52,14 @@ class Notifications extends React.Component {
     }
 }
 
+Notifications.propTypes = {
+    notifications: PropTypes.shape({
+        invalidCharsFound: PropTypes.bool.isRequired,
+        wordsMaxLengthExceeded: PropTypes.bool.isRequired,
+        puzzleReady: PropTypes.bool.isRequired,
+        puzzleError: PropTypes.bool.isRequired
+    }).isRequired,
+    lang: PropTypes.objectOf(PropTypes.string).isRequired
+};
+
 export default Notifications;
