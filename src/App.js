@@ -31,6 +31,10 @@ class App extends React.Component {
   render() {
     return (
         <React.Fragment>
+            <Notifications
+                notifications={this.props.notifications}
+                lang={this.props.lang}
+            />
             <Layout
                 menu={<Navigation lang={this.props.lang} />}
                 navButtons={<Navigation navButtons lang={this.props.lang} />}
@@ -44,7 +48,13 @@ class App extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-    lang: state.settings.language.messages
+    lang: state.settings.language.messages,
+    notifications: {
+        invalidCharsFound: state.words.warnings.invalidChars,
+        wordsMaxLengthExceeded: state.words.warnings.maxLengthExceeded,
+        puzzleReady: Boolean(state.puzzle.generated),
+        puzzleError: state.puzzle.error
+    }
 });
 
 const mapDispatchToProps = (dispatch) => ({
