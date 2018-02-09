@@ -11,11 +11,18 @@ class Notifications extends React.Component {
         puzzleError: false
     }
 
-    types = {
+    styles = {
         invalidCharsFound: 'warning',
         wordsMaxLengthExceeded: 'warning',
         puzzleReady: 'success',
         puzzleError: 'error'
+    }
+
+    langStrings = {
+        invalidCharsFound: 'INVALID_CHARS_FOUND',
+        wordsMaxLengthExceeded: 'MAX_WORD_LENGTH_EXCEEDED',
+        puzzleReady: 'PUZZLE_READY',
+        puzzleError: 'PUZZLE_ERROR'
     }
 
     componentWillReceiveProps({notifications}) {
@@ -43,8 +50,10 @@ class Notifications extends React.Component {
     }
 
     launchNotification(notification) {
-        const type = this.types[notification];
-        return message[type](notification, 1);
+        const style = this.styles[notification],
+              langString = this.langStrings[notification];
+
+        return message[style](this.props.lang[langString], 2);
     }
 
     render() {
