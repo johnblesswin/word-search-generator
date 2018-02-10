@@ -4,7 +4,7 @@ import { message } from 'antd';
 
 class Notifications extends React.Component {
 
-    state = {
+    active = {
         invalidCharsFound: false,
         wordsMaxLengthExceeded: false,
         puzzleReady: false,
@@ -25,35 +25,34 @@ class Notifications extends React.Component {
         puzzleError: 'PUZZLE_ERROR'
     }
 
-    componentWillReceiveProps({notifications}) {
+    componentWillUpdate({notifications, lang}) {
 
-        const activeNotifications = this.state,
+        const activeNotifications = this.active,
               newNotifications = {};
 
         Object.entries(notifications).forEach(([name, enabled]) => {
             
             // Display new notifications
             if (!activeNotifications[name] && notifications[name]) {
-                newNotifications[name] = this.launchNotification(name);
+                newNotifications[name] = this.launchNotification(name, lang);
             }
-            // Close notifications that have just become unrelevant
+            // Clear notifications that have just become unrelevant
             if (activeNotifications[name] && !notifications[name]) {
                 newNotifications[name] = false;
             }
         });
 
-        this.setState(prevState => ({
-            ...prevState,
+        this.active = {
+            ...activeNotifications,
             ...newNotifications
-        }));
-
+        };
     }
 
-    launchNotification(notification) {
+    launchNotification(notification, lang) {
         const style = this.styles[notification],
               langString = this.langStrings[notification];
 
-        return message[style](this.props.lang[langString], 2);
+        return message[style](lang[langString], 2);
     }
 
     render() {
