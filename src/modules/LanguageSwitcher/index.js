@@ -1,11 +1,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { switchLanguage } from '../../actions/index';
+import { Menu, Dropdown, Icon } from 'antd';
 
 class LanguageSwitcher extends React.Component {
 
+    switchLanguage(langCode) {
+        if (langCode !== this.props.currentLang) {
+            this.props.switchLanguage(langCode);
+        }
+    }
+
+    getMenu() {
+        return (
+            <Menu onClick={({key}) => this.switchLanguage(key)}>
+                {this.props.languages.map(language => 
+                    <Menu.Item
+                        key={language.code}
+                    >
+                        {language.name}
+                    </Menu.Item>
+                )}
+          </Menu>
+        );
+    }
+
     render() {
-        return null;
+        const menu = this.getMenu();
+        return (
+            <Dropdown
+                overlay={menu}
+                disabled={this.props.locked}
+            >
+                <a>{this.props.currentLang} <Icon type="down" /></a>
+            </Dropdown>
+        );
     }
 }
 
