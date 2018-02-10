@@ -55,7 +55,15 @@ class App extends React.Component {
 const mapStateToProps = (state, ownProps) => ({
     lang: state.settings.language.messages,
     languageOptions: {
-        languages: state.settings.language.allLanguages,
+        languages: Object.entries(state.settings.language.allLanguages).reduce((all, [code, {name}]) =>
+            [
+                ...all,
+                {
+                    code,
+                    name
+                }
+            ]
+        , []),
         currentLang: state.settings.language.current,
         locked: state.settings.locked
     },
