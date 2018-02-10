@@ -36,11 +36,12 @@ class App extends React.Component {
                 notifications={this.props.notifications}
                 lang={this.props.lang}
             />
-            <Layout
-                languageSwitcher={<LanguageSwitcher
+            <LanguageSwitcher
                     {...this.props.languageOptions}
                     switchLanguage={this.props.actions.switchLanguage}
-                />}
+            />
+            <Layout
+                title={this.props.lang.HEADER_TITLE}
                 menu={<Navigation lang={this.props.lang} />}
                 navButtons={<Navigation navButtons lang={this.props.lang} />}
                 pageContent={this.getPageContent()}
