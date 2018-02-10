@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Menu, Dropdown, Icon } from 'antd';
+import './style.css';
 
 class LanguageSwitcher extends React.Component {
 
@@ -17,7 +18,8 @@ class LanguageSwitcher extends React.Component {
                     <Menu.Item
                         key={language.code}
                     >
-                        {language.name}
+                        {language.name}&nbsp;
+                        {(language.code === this.props.currentLang) && <Icon type="check" />}
                     </Menu.Item>
                 )}
           </Menu>
@@ -31,7 +33,12 @@ class LanguageSwitcher extends React.Component {
                 overlay={menu}
                 disabled={this.props.locked}
             >
-                <a>{this.props.currentLang} <Icon type="down" /></a>
+                <a
+                    className="language-switcher"
+                >
+                    {this.props.currentLang}
+                    <Icon type="down" />
+                </a>
             </Dropdown>
         );
     }

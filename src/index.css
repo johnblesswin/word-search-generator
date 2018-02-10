@@ -8,6 +8,7 @@ body {
     margin: 0 auto;
     border: 1px solid #E5E5E5;
     padding: 30px;
+    position: relative;
 }
 
 .app-name {
