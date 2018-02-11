@@ -9,8 +9,7 @@ class Layout extends React.Component {
     return (
         <React.Fragment>
             <div className="layout">
-            <h1 className="app-name">word search printable generator</h1>
-            {this.props.languageSwitcher}
+                <h1 className="app-name">{this.props.title}</h1>
                 <div className="layout__menu">
                     {this.props.menu}
                 </div>
