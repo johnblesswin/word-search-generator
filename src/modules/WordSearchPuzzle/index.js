@@ -3,15 +3,6 @@ import Board from './Board';
 
 class WordSearchPuzzle extends React.Component {
 
-
-    _render() {
-        return (
-            <React.Fragment>
-                {this.props.puzzle}
-            </React.Fragment>
-        );
-    }
-
     render() {
         const {puzzle} = this.props;
         return (
