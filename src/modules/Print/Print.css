@@ -12,6 +12,10 @@
         visibility: hidden !important;
         position: absolute;
     }
+
+    .printable__word-box {
+        display: none;
+    }
 }
 
 @media print {
@@ -24,14 +28,30 @@
     }
 
     .printable {
-        width: 28.7cm;
-        height: 20cm;
+        width: 29.7cm;
+        height: 21cm;
         padding: 0.5cm;
         position: fixed;
         top: 0;
         left: 0;
         background-color: #fff;
         z-index: 100;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    
+    .printable__word-box {
+        display: block;
+        width: 8cm;
+        height: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
+
+    .printable__word-box--word {
+        display: block;
     }
 
     .printable .WS-board-preview {
