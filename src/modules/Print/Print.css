@@ -1,0 +1,48 @@
+.printable .WS-board-preview__highlights-wrapper {
+    display: none;
+}
+
+.printable .WS-board-preview__letter {
+    border-color: transparent;
+}
+
+@media screen {
+    .printable .WS-board-preview {
+        width: 20cm;
+        visibility: hidden !important;
+        position: absolute;
+    }
+}
+
+@media print {
+
+    body {
+        width: 29.7cm;
+        height: 21cm;
+        margin: 0;
+        padding: 0;
+    }
+
+    .printable {
+        width: 28.7cm;
+        height: 20cm;
+        padding: 0.5cm;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: #fff;
+        z-index: 100;
+    }
+
+    .printable .WS-board-preview {
+        visibility: visible !important;
+        display: flex;
+        width: 20cm;
+        height: 20cm;
+    }
+
+    .printable .WS-board-preview__letter {
+        display: flex;
+        font-weight: 100;
+    }
+}
