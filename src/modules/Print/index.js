@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../../actions';
 import { connect } from 'react-redux';
 import WordSearchPuzzle from '../WordSearchPuzzle';
+import WordBox from './WordBox';
 import './Print.css';
 
 class Print extends React.Component {
@@ -19,6 +20,7 @@ class Print extends React.Component {
         return (
             <div className="printable">
                 <WordSearchPuzzle puzzle={this.props.puzzle.generated}/>
+                <WordBox words={this.props.words} />
             </div>
         );
   }
@@ -27,7 +29,10 @@ class Print extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    puzzle: state.puzzle
+    puzzle: state.puzzle,
+    words: (state.puzzle.generated
+        ? state.puzzle.generated.words.map(item => item.word)
+        : [])
   };
 }
 
