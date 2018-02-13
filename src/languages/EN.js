@@ -4,6 +4,9 @@ export const charset = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', '
 
 export const messages = {
 
+    HEADER_TITLE: "word search printable generator",
+    PAGE_TITLE: "Word Search Generator",
+
     /* menu & navigation buttons */
     MENU_SETUP_GRID: "Set grid size",
     MENU_ADD_WORDS: "Add words",
