@@ -35,12 +35,14 @@
         expect(state.touched).toBe(true);
     });
 
-    it('should correctly switch the language', () => {
+    it('should correctly switch the language code', () => {
         state.language.current = 'EN';
         action = actions.switchLanguage('PL');
         state = reducer(state, action);
         expect(state.language.current).toBe('PL');
     });
+
+    it('should switch messages to match the current language');
 
     it('should enable the "touched" flag on language change', () => {
         state.touched = false;

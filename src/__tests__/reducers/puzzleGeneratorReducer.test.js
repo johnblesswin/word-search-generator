@@ -29,6 +29,8 @@ describe('puzzle generator reducer', () => {
         expect(state.generated).toBe(null);
     });
 
+    it('should clear any previously generator puzzle on language change');
+
     it('should correctly set flags on new puzzle request', () => {
         state.isPending = false,
         state.error = true;
