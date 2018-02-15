@@ -5,7 +5,7 @@ export default {
   gridSize: {
     min: 5,
     max: 100,
-    default: 12
+    default: 20
   },
 
 
