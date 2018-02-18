@@ -50,16 +50,18 @@
     "style-loader": "^0.19.1",
     "tslint": "^5.9.1",
     "typescript": "^2.7.0-dev.20180118",
+    "uglifyjs-webpack-plugin": "^1.2.5",
     "url-loader": "^0.6.2",
     "webpack": "^3.10.0",
+    "webpack-bundle-analyzer": "^2.11.1",
     "webpack-dev-server": "^2.10.0",
+    "webpack-merge": "^4.1.2",
     "worker-loader": "^1.1.0"
   },
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server --config webpack.dev.js --history-api-fallback --hot --inline",
     "test": "jest --silent",
     "test:watch": "jest --watch --noStackTrace",
-    "build": "webpack -d && cp src/index.html dist/index.html && webpack-dev-server --content-base src/ --inline --hot --history-api-fallback",
-    "build:prod": "webpack -p && cp src/index.html dist/index.html"
+    "build": "webpack --config webpack.prod.js"
   }
 }

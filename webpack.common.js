@@ -1,35 +1,25 @@
 const path = require('path');
-const webpack = require('webpack');
+
 const fs  = require('fs');
 const lessToJs = require('less-vars-to-js');
 
 const themeVariables = lessToJs(fs.readFileSync(path.join(__dirname, './src/ant-theme-vars.less'), 'utf8'));
-console.log(themeVariables);
+
 module.exports = {
-  devtool: 'inline-source-map',
-  entry: [
-    'babel-polyfill',
-    path.resolve(__dirname, 'src/index')
-  ],
-  target: 'web',
+  entry:  ['babel-polyfill', './src/index.js'],
   output: {
-    path: __dirname + '/dist',
-    publicPath: '/',
+    path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
   },
-  devServer: {
-    contentBase: path.resolve(__dirname, 'src'),
-    historyApiFallback: true
-  },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin()
-  ],
+  target: 'web',
   module: {
-
     rules: [
       {
         test: /\.js$/,
-        loader: "babel-loader"
+        exclude: /(node_modules)/,
+        use: {
+          loader: 'babel-loader'
+        }
       },
       {
         test: /\.worker\.js$/,
@@ -52,7 +42,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.(gif|png|jpe?g|svg)$/,
+        test: /\.(png|svg|jpe?g|gif)$/,
         use: [
           'file-loader',
           {
@@ -63,6 +53,12 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.(ttf|woff|eot)$/,
+        use: {
+            loader: 'file-loader'
+        }
+      }
     ]
-  }
+  },
 };
