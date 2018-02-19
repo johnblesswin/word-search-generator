@@ -6,11 +6,13 @@ import { Provider } from 'react-redux';
 import './index.css';
 import App from './App';
 
+const basename = process.env.PUBLIC_PATH || '/';
+
 const store = configureStore();
 
 render(
   <Provider store={store}>
-    <Router>
+    <Router basename={basename}>
       <App />
     </Router>
   </Provider>,
