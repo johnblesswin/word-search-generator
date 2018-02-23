@@ -8,7 +8,7 @@ class Navigation extends React.Component {
 
     getStep = () => {
         switch (this.props.location.pathname) {
-            case '/setup-grid': return 0;
+            case '/': return 0;
             case '/add-words': return 1;
             case '/preview': return 2;
             case '/print': return 3;
@@ -26,7 +26,7 @@ class Navigation extends React.Component {
 
         return (
             <Steps current={activeStep} className="navigation-stepper">
-                <Steps.Step title={lang.MENU_SETUP_GRID} onClick={() => this.navigateTo('/setup-grid')} />
+                <Steps.Step title={lang.MENU_SETUP_GRID} onClick={() => this.navigateTo('/')} />
                 <Steps.Step title={lang.MENU_ADD_WORDS} onClick={() => this.navigateTo('/add-words')} />
                 <Steps.Step title={lang.MENU_PREVIEW} onClick={() => this.navigateTo('/preview')} />
                 <Steps.Step title={lang.MENU_PRINT} onClick={() => this.navigateTo('/print')} />

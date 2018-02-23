@@ -8,7 +8,6 @@ import Layout from './modules/Layout';
 import LanguageSwitcher from './modules/LanguageSwitcher';
 import Navigation from './modules/Navigation';
 import Notifications from './modules/Notifications';
-import StartPage from './modules/StartPage';
 import SetupGrid from './modules/SetupGrid';
 import WordList from './modules/WordList';
 import Preview from './modules/Preview';
@@ -19,8 +18,7 @@ class App extends React.Component {
   getPageContent = () => {
     return (
         <Switch>
-            <Route exact path='/' component={StartPage} />
-            <Route path='/setup-grid' component={SetupGrid} />
+            <Route exact path='/' component={SetupGrid} />
             <Route path='/add-words' component={WordList} />
             <Route path='/preview' component={Preview} />
             <Route path='/print' component={Print} />
