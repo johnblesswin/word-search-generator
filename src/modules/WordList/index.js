@@ -62,13 +62,37 @@ class WordList extends React.Component {
         );
     }
 
+    checkCurrentlyTypedWord() {
+        const { invalidChars, maxLengthExceeded, alreadyExists } = this.props.currentlyTyped.warnings;
+        const messages = this.props.lang;
+
+        if (invalidChars) {
+            return (
+                (invalidChars.length > 1
+                    ? messages.SUBMITTED_WORD_HAS_INVALID_CHARS
+                    : messages.SUBMITTED_WORD_HAS_INVALID_CHAR
+                )
+                + invalidChars.join(', ')
+            );
+        }
+
+        if (maxLengthExceeded) return messages.SUBMITTED_WORD_TOO_LONG;
+
+        if (alreadyExists) return messages.SUBMITTED_WORD_ALREADY_EXISTS;
+    }
+
     render() {
+
+        const error = this.checkCurrentlyTypedWord();
+        console.log(error);
+
         return (
             <div className="word-list">
                 <Form layout="inline">
                     <Form.Item
                         label=""
-                        validateStatus=""
+                        validateStatus={error ? 'error' : ''}
+                        help={error}
                     >
                     <Input
                         placeholder="Add word..."
@@ -102,7 +126,8 @@ WordList.propTypes = {
 function mapStateToProps(state, ownProps) {
     return {
         currentlyTyped: state.words.currentlyTyped,
-        list: state.words.list
+        list: state.words.list,
+        lang: state.settings.language.messages
     };
 }
 
