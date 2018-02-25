@@ -16,8 +16,9 @@ export const messages = {
     NAV_NEXT: "Next",
 
     /* word input warnings */
-    SUBMITTED_WORD_TOO_SHORT: "The word is too short.",
-    SUBMITTED_WORD_TOO_LONG: "The word is too long and won’t fit the board.",
+    SUBMITTED_WORD_ALREADY_EXISTS: "The word is already on the list.",
+    SUBMITTED_WORD_TOO_SHORT: "The word is too short",
+    SUBMITTED_WORD_TOO_LONG: "The word is too long and won’t fit the board",
     SUBMITTED_WORD_HAS_INVALID_CHAR: "Invalid character: ",
     SUBMITTED_WORD_HAS_INVALID_CHARS: "Invalid characters: ",
 

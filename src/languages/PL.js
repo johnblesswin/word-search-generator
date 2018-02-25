@@ -16,15 +16,16 @@ export const messages = {
     NAV_NEXT: "Dalej",
 
     /* word input warnings */
-    SUBMITTED_WORD_TOO_SHORT: "The word is too short.",
-    SUBMITTED_WORD_TOO_LONG: "The word is too long and won’t fit the board.",
-    SUBMITTED_WORD_HAS_INVALID_CHAR: "Invalid character: ",
-    SUBMITTED_WORD_HAS_INVALID_CHARS: "Invalid characters: ",
+    SUBMITTED_WORD_ALREADY_EXISTS: "Wyraz znajduje się już na liście",
+    SUBMITTED_WORD_TOO_SHORT: "Wyraz jest zbyt krótki",
+    SUBMITTED_WORD_TOO_LONG: "Wyraz jest zbyt długi i nie zmieści się na planszy",
+    SUBMITTED_WORD_HAS_INVALID_CHAR: "Nieprawidłowy znak: ",
+    SUBMITTED_WORD_HAS_INVALID_CHARS: "Nieprawidłowe znaki: ",
 
     /* word list warnings */
-    WORD_TOO_LONG: "This word is too long.",
-    WORD_HAS_INVALID_CHAR: "Invalid character: ",
-    WORD_HAS_INVALID_CHARS: "Invalid characters: ",
+    WORD_TOO_LONG: "Wyraz jest zbyt długi.",
+    WORD_HAS_INVALID_CHAR: "Nieprawidłowy znak: ",
+    WORD_HAS_INVALID_CHARS: "Nieprawidłowe znaki: ",
 
     /* general notifications */
     PUZZLE_READY: "Wykreślanka jest gotowa!",
