@@ -11,7 +11,7 @@ module.exports = merge(common, {
         publicPath,
     },
     plugins: [
-        new BundleAnalyzerPlugin(),
+        //new BundleAnalyzerPlugin(),
         new UglifyJSPlugin(),
         new webpack.DefinePlugin({
             'process.env': {
