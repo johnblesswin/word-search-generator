@@ -28,6 +28,7 @@ export const messages = {
     WORD_HAS_INVALID_CHARS: "Nieprawidłowe znaki: ",
 
     /* general notifications */
+    PUZZLE_IS_BEING_GENERATED: "Generowanie wykreślanki...",
     PUZZLE_READY: "Wykreślanka jest gotowa!",
     PUZZLE_ERROR: "Błąd podczas tworzenia wykreślanki :(",
     MAX_WORD_LENGTH_EXCEEDED: "Niektóre wyrazy są zbyt długie.",

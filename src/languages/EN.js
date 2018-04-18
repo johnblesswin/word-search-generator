@@ -28,6 +28,7 @@ export const messages = {
     WORD_HAS_INVALID_CHARS: "Invalid characters: ",
 
     /* general notifications */
+    PUZZLE_IS_BEING_GENERATED: "Generating...",
     PUZZLE_READY: "Your word search puzzle is ready!",
     PUZZLE_ERROR: "Error generating word search puzzle :(",
     MAX_WORD_LENGTH_EXCEEDED: "Some words are too long and won't be included. Check the word list.",
