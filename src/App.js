@@ -8,6 +8,7 @@ import Layout from './modules/Layout';
 import LanguageSwitcher from './modules/LanguageSwitcher';
 import Navigation from './modules/Navigation';
 import Notifications from './modules/Notifications';
+import WaitOverlay from './modules/WaitOverlay';
 import SetupGrid from './modules/SetupGrid';
 import WordList from './modules/WordList';
 import Preview from './modules/Preview';
@@ -30,6 +31,10 @@ class App extends React.Component {
   render() {
     return (
         <React.Fragment>
+            <WaitOverlay
+                isActive={this.props.puzzleGenerationPending}
+                lang={this.props.lang}
+            />
             <Notifications
                 notifications={this.props.notifications}
                 lang={this.props.lang}
@@ -71,7 +76,8 @@ const mapStateToProps = (state, ownProps) => ({
         wordsMaxLengthExceeded: state.words.warnings.maxLengthExceeded,
         puzzleReady: Boolean(state.puzzle.generated),
         puzzleError: state.puzzle.error
-    }
+    },
+    puzzleGenerationPending: state.puzzle.isPending
 });
 
 const mapDispatchToProps = (dispatch) => ({
