@@ -4,8 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../../actions';
 import { Spin, Slider } from 'antd';
-import GridPreview from './GridPreview';
-import './GridPreview.css';
+import GridPreview from '../GridPreview';
 
 class SetupGrid extends React.Component {
 
