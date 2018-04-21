@@ -1,9 +1,9 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
-import * as actions from '../actions';
+import * as actions from '../../actions';
 import { connect } from 'react-redux';
-import GridPreview from './GridPreview';
-import WordSearchPuzzle from './WordSearchPuzzle';
+import GridPreview from '../GridPreview';
+import WordSearchPuzzle from '../WordSearchPuzzle';
 
 class Preview extends React.Component {
 
