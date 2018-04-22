@@ -18,13 +18,11 @@ class Layout extends React.Component {
                     transitionEnterTimeout={300}
                     transitionLeaveTimeout={1}
                 >
-                    <div key={this.props.pagePath}> {/* a unique key is required for transitions */}
-                        <div className="layout__page-content">
-                            {this.props.pageContent}
-                        </div>
-                        <div className="layout__nav-buttons">
-                            {this.props.navButtons}
-                        </div>
+                    <div
+                        className="layout__page-content"
+                        key={this.props.pagePath}
+                    >
+                        {this.props.pageContent}
                     </div>
                 </CSSTransitionGroup>
             </div>
@@ -35,7 +33,6 @@ class Layout extends React.Component {
 
 Layout.propTypes = {
     menu: PropTypes.element.isRequired,
-    navButtons: PropTypes.element.isRequired,
     pageContent: PropTypes.element.isRequired,
     pagePath: PropTypes.string.isRequired
 };

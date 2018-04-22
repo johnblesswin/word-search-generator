@@ -46,7 +46,6 @@ class App extends React.Component {
             <Layout
                 title={this.props.lang.HEADER_TITLE}
                 menu={<Navigation lang={this.props.lang} />}
-                navButtons={<Navigation navButtons lang={this.props.lang} />}
                 pageContent={this.getPageContent()}
                 pagePath={this.props.location.pathname}
             />

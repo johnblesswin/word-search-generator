@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { Steps, Button, Icon } from 'antd';
+import { Steps, Icon } from 'antd';
 import './Navigation.css';
 
 class Navigation extends React.Component {
@@ -34,24 +34,6 @@ class Navigation extends React.Component {
         );
     }
 
-    getNavButtons = () => {
-        const {lang} = this.props;
-
-        return (
-            <div>
-        <Button.Group size="large">
-          <Button type="normal" disabled>
-            <Icon type="left" />
-            {lang.NAV_BACK}
-          </Button>
-          <Button type="primary">
-            {lang.NAV_NEXT}
-            <Icon type="right" />
-          </Button>
-        </Button.Group>
-            </div>
-        );
-    }
 
     render() {
         return this.props.navButtons
