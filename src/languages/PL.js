@@ -33,4 +33,7 @@ export const messages = {
     PUZZLE_ERROR: "Błąd podczas tworzenia wykreślanki :(",
     MAX_WORD_LENGTH_EXCEEDED: "Niektóre wyrazy są zbyt długie.",
     INVALID_CHARS_FOUND: "Niektóre wyrazy mają niedozwolone znaki.",
+
+    PRINT_BUTTON: "Wydrukuj wykreślankę",
+    PRINT_NOTE: "Uwaga: Nalepiej ją wydrukować w orientacji poziomej oraz bez dodatkowych marginesów."
 };

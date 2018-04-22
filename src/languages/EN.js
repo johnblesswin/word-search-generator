@@ -33,4 +33,7 @@ export const messages = {
     PUZZLE_ERROR: "Error generating word search puzzle :(",
     MAX_WORD_LENGTH_EXCEEDED: "Some words are too long and won't be included. Check the word list.",
     INVALID_CHARS_FOUND: "Some words have invalid characters and won't be included. Check the word list.",
+
+    PRINT_BUTTON: "Print puzzle",
+    PRINT_NOTE: "Note: For best results, print in landscape mode and without extra margins."
 };
