@@ -4,7 +4,7 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const common = require('./webpack.common.js');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-const publicPath = '/projects/word-search-generator/';
+const publicPath = '/word-search-generator/';
 
 module.exports = merge(common, {
     output: {
