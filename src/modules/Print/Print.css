@@ -1,3 +1,15 @@
+.print {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 600px;
+}
+
+.print-note {
+    margin-top: 2em;
+}
+
 .printable .WS-board-preview__highlights-wrapper {
     display: none;
 }
