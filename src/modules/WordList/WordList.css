@@ -1,3 +1,18 @@
+.word-input {
+    border-bottom: 1px solid #E5E5E5;
+    padding-bottom: 3em;
+    margin-bottom: 2em;
+}
+
+.word-input__form {
+    display: flex;
+    justify-content: center;
+}
+
+.word-input__form .ant-form-item-with-help {
+    margin-bottom: 0;
+}
+
 .word-list {
 
 }
@@ -13,24 +28,40 @@
 
 .word-list-item {
     border: 1px solid lightgray;
-    background-color: #F4F4F4;
+    background-color: #fff;
     border-radius: 5em;
     margin: 0 20px 25px 0;
-    padding: 10px 15px;
-    font-size: 120%;
+    padding: .25em .5em .25em 1.5em;
+    font-size: 80%;
     text-transform: uppercase;
 }
 
+.word-list-item--invalid {
+    text-decoration: line-through;
+    background-color: lightgray;
+}
+
 .word-list-item__word {
-    margin-right: 0.5em;
+    margin-right: 0.25em;
+    vertical-align: 7%;
+}
+
+.word-list-item__delete-btn {
+    border: none;
+    background: transparent;
 }
 
 .word-list-item__delete-btn .anticon {
-    color: lightgray;
+    color: #D3D3D3;
 }
 
 .word-list-item__delete-btn:hover .anticon {
     color: white;
+}
+
+.word-list-item__error {
+    margin-bottom: 0;
+    padding-left: 1.25em;
 }
 
 .word-enter {
