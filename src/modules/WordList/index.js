@@ -44,6 +44,9 @@ class WordList extends React.Component {
                 {list.map(item => (
                     <Item
                         word={item.word}
+                        isValid={item.isValid}
+                        warnings={item.warnings}
+                        lang={this.props.lang}
                         key={item.word}
                         remove={this.removeWord}
                     >
@@ -84,34 +87,41 @@ class WordList extends React.Component {
     render() {
 
         const error = this.checkCurrentlyTypedWord();
-        console.log(error);
 
         return (
-            <div className="word-list">
-                <Form layout="inline">
-                    <Form.Item
-                        label=""
-                        validateStatus={error ? 'error' : ''}
-                        help={error}
+            <React.Fragment>
+                <div className="word-input">
+                    <Form 
+                        layout="inline"
+                        className="word-input__form"
                     >
-                    <Input
-                        placeholder="Add word..."
-                        value={this.props.currentlyTyped.word}
-                        onPressEnter={this.keyDown}
-                        onChange={this.typeWord}
-                        size="large"
-                        id="add-word" />
-                    </Form.Item>
-                    <Button
-                        onClick={this.submitWord}
-                        type="primary"
-                        shape="circle"
-                        icon="plus"
-                        size="large"
-                    />
-                </Form>
-                {this.getList()}
-            </div>
+                        <Form.Item
+                            label=""
+                            validateStatus={error ? 'error' : ''}
+                            help={error}
+                        >
+                        <Input
+                            placeholder="Add word..."
+                            value={this.props.currentlyTyped.word}
+                            onPressEnter={this.keyDown}
+                            onChange={this.typeWord}
+                            size="large"
+                            id="add-word"
+                        />
+                        </Form.Item>
+                        <Button
+                            onClick={this.submitWord}
+                            type="primary"
+                            shape="circle"
+                            icon="plus"
+                            size="large"
+                        />
+                    </Form>
+                </div>
+                <div className="word-list">
+                    {this.getList()}
+                </div>
+            </React.Fragment>
         );
     }
 
