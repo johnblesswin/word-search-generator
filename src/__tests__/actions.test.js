@@ -107,14 +107,14 @@ describe('requestPuzzle action creator', () => {
 
     it('should not call the puzzle generator if words and grid are untouched', () => {
         state.words.touched = false;
-        state.settings.grid.touched = false;
+        state.settings.touched = false;
         runCreator();
         expect(generatePuzzle).toHaveBeenCalledTimes(0);
     });
 
     it('should not dispatch any action if words and grid are untouched', () => {
         state.words.touched = false;
-        state.settings.grid.touched = false;
+        state.settings.touched = false;
         runCreator();
         expect(dispatch).toHaveBeenCalledTimes(0);
     });
@@ -137,7 +137,7 @@ describe('requestPuzzle action creator', () => {
 
         state.words.charset = charset;
         state.words.list = wordList;
-        state.settings.grid.size.current = gridSize;
+        state.settings.gridSize.current = gridSize;
 
         runCreator();
         expect(generatePuzzle).toHaveBeenCalledWith(gridSize, wordListFinal, charset);
